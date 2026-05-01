@@ -993,7 +993,7 @@ function launchPOS(branchId) {
   if (daysLeft(b.renewal) < 0) { toast('Subscription expired. Renew first.', 'err'); return; }
   localStorage.setItem('saassalon_pos_branch', JSON.stringify(b));
   localStorage.setItem('saassalon_launch_store_id', b.id);
-  var posUrl = 'https://navarshabeer768-arch.github.io/salon-saas/SoloPOS_v2.html?store=' + encodeURIComponent(b.id);
+  var posUrl = 'https://navarshabeer768-arch.github.io/salon-saas/pos.html?store=' + encodeURIComponent(b.id);
   window.open(posUrl, '_blank');
 }
 
