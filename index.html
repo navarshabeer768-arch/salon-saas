@@ -992,7 +992,14 @@ function launchPOS(branchId) {
   if (!b) return;
   if (daysLeft(b.renewal) < 0) { toast('Subscription expired. Renew first.', 'err'); return; }
   localStorage.setItem('saassalon_pos_branch', JSON.stringify(b));
-  toast('Launching POS for ' + b.name + ' …', 'ok');
+  localStorage.setItem('saassalon_launch_store_id', b.id);
+  var posUrl = 'SoloPOS_v2.html?store=' + encodeURIComponent(b.id);
+  var win = window.open(posUrl, '_blank');
+  if (!win) {
+    toast('Pop-up blocked! Allow pop-ups then try again.', 'err');
+  } else {
+    toast('Opening POS for ' + b.name + ' ...', 'ok');
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
