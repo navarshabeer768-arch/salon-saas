@@ -81,7 +81,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
 .topbar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .online-dot{width:8px;height:8px;border-radius:50%;background:#16a34a;display:inline-block}
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:#0f172a;font-size:20px;line-height:1}
-.content{flex:1;overflow-y:auto;padding:20px 24px;background:#f8fafc;position:relative}.pos-fullbleed{margin:-20px -24px!important;height:calc(100vh - var(--topbar-h))!important;overflow:hidden!important}
+.content{flex:1;overflow-y:auto;padding:16px 20px;background:#f8fafc;position:relative}
+.pos-fullbleed{margin:-16px -20px!important;height:calc(100vh - var(--total-nav))!important;overflow:hidden!important}
 /* BUTTONS */
 .btn{padding:8px 16px;border-radius:8px;border:1px solid #e2e8f0;background:white;color:#374151;font-size:13px;cursor:pointer;transition:all 0.15s;font-weight:600;white-space:nowrap}
 .btn:hover{background:#f8fafc;border-color:#cbd5e1}
@@ -116,48 +117,78 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
 .staff-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:12px}
 .staff-row:last-child{border-bottom:none}
 .staff-ava{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0}
-/* POS */
-.pos-wrap{display:grid;grid-template-columns:1fr 360px;gap:0;height:calc(100vh - var(--topbar-h));min-height:0}
-.pos-left{padding:20px 16px 20px 24px;overflow-y:auto}
-.pos-right{background:#f8fafc;border-left:1px solid #e2e8f0;padding:16px;display:flex;flex-direction:column;overflow:hidden;height:calc(100vh - var(--topbar-h));position:sticky;top:0}
+/* POS layout — uses --total-nav (store topbar + top nav bar) */
+.pos-wrap{display:grid;grid-template-columns:1fr 340px;gap:0;height:calc(100vh - var(--total-nav));min-height:0}
+.pos-left{padding:16px 14px 16px 20px;overflow-y:auto;height:100%}
+.pos-right{background:#fff;border-left:2px solid #f1f5f9;padding:14px;display:flex;flex-direction:column;overflow:hidden;height:calc(100vh - var(--total-nav))}
 /* Mobile POS bill drawer */
 .pos-bill-fab{display:none;position:fixed;bottom:calc(var(--bottom-nav-h) + 14px);right:16px;z-index:80;background:#e11d48;color:white;border:none;border-radius:50px;padding:14px 22px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(225,29,72,0.45)}
 .pos-bill-drawer{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:white;border-radius:20px 20px 0 0;box-shadow:0 -4px 30px rgba(0,0,0,0.15);transform:translateY(100%);transition:transform 0.3s ease;max-height:85vh;overflow-y:auto;padding:16px 16px calc(var(--bottom-nav-h) + 8px)}
 .pos-bill-drawer.open{transform:translateY(0)}
 .drawer-handle{width:40px;height:4px;background:#e2e8f0;border-radius:2px;margin:0 auto 16px;cursor:pointer}
-.cat-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;flex-wrap:nowrap;scrollbar-width:none}
+/* Category tabs — bigger for touch */
+.cat-tabs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;flex-wrap:nowrap;scrollbar-width:none}
 .cat-tabs::-webkit-scrollbar{display:none}
-.cat-tab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#64748b;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+.cat-tab{padding:10px 20px;border-radius:22px;font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid #e2e8f0;background:white;color:#64748b;transition:all .15s;white-space:nowrap;flex-shrink:0;min-height:42px}
 .cat-tab.active{background:#e11d48;color:white;border-color:#e11d48}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.svc-btn{padding:16px 12px;border-radius:12px;border:1px solid #e2e8f0;background:white;cursor:pointer;text-align:left;transition:all 0.15s;-webkit-tap-highlight-color:transparent}
+/* Service grid — bigger touch targets */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.svc-btn{padding:18px 14px;border-radius:14px;border:1.5px solid #e2e8f0;background:white;cursor:pointer;text-align:left;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:120px;display:flex;flex-direction:column}
 .svc-btn:active{transform:scale(0.97)}
 .svc-btn:hover{border-color:#e11d48;background:#fff1f2}
-.svc-btn.out-of-stock{opacity:0.5;cursor:not-allowed}
+.svc-btn.out-of-stock{opacity:.5;cursor:not-allowed}
 .svc-btn.out-of-stock:hover{border-color:#e2e8f0;background:white}
 .svc-btn.added{border-color:#e11d48;background:#fff1f2;box-shadow:0 0 0 2px #fda4af}
-.svc-icon{font-size:26px;display:block;margin-bottom:8px}
-.svc-n{font-size:13px;font-weight:700;color:#0f172a;display:block}
-.svc-p{font-size:13px;color:#0d9488;font-weight:700;margin-top:3px;display:block}
-.svc-t{font-size:11px;color:#94a3b8;display:block}
-.bill-hdr{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:8px}
+.svc-icon{font-size:32px;display:block;margin-bottom:8px}
+.svc-n{font-size:14px;font-weight:800;color:#0f172a;display:block;line-height:1.2}
+.svc-p{font-size:14px;color:#0d9488;font-weight:800;margin-top:4px;display:block}
+.svc-t{font-size:12px;color:#94a3b8;display:block;margin-top:2px}
+/* Product card with image */
+.prod-img{width:100%;height:80px;object-fit:cover;border-radius:8px;margin-bottom:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden}
+/* Package card */
+.pkg-card{padding:16px;border-radius:14px;border:1.5px solid #e2e8f0;background:white;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.pkg-card:hover{border-color:#7c3aed;background:#faf5ff}
+.pkg-card.added{border-color:#7c3aed;background:#faf5ff;box-shadow:0 0 0 2px #c4b5fd}
+.pkg-icon{font-size:30px;margin-bottom:8px;display:block}
+.pkg-n{font-size:15px;font-weight:800;color:#0f172a}
+.pkg-svcs{font-size:11px;color:#64748b;margin-top:3px;line-height:1.5}
+.pkg-p{font-size:15px;color:#7c3aed;font-weight:900;margin-top:6px}
+.pkg-save{font-size:11px;color:#16a34a;font-weight:700;background:#dcfce7;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:3px}
+/* Membership card */
+.mem-card{padding:18px;border-radius:14px;border:1.5px solid #e2e8f0;background:linear-gradient(135deg,#fff,#f5f3ff);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.mem-card:hover{border-color:#d97706;transform:translateY(-1px);box-shadow:0 4px 16px rgba(217,119,6,.15)}
+.mem-card::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(217,119,6,.06)}
+.mem-icon{font-size:32px;margin-bottom:8px;display:block}
+.mem-n{font-size:16px;font-weight:800;color:#0f172a}
+.mem-desc{font-size:12px;color:#64748b;margin-top:4px}
+.mem-price{font-size:22px;font-weight:900;color:#d97706;margin-top:8px}
+/* Bill items — larger text */
+.bill-hdr{font-size:14px;font-weight:800;color:#0f172a;margin-bottom:8px}
 .bill-items{flex:1;overflow-y:auto;margin-bottom:8px}
-.bill-item{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:11px}
-.bill-item-name{flex:1;font-weight:600;color:#0f172a}
-.bill-item-price{font-weight:700;color:#0f172a}
-.bill-del{color:#e11d48;cursor:pointer;font-size:14px;padding:4px 6px;line-height:1}
-.bill-totals{border-top:1px solid #e2e8f0;padding-top:10px}
-.bill-row{display:flex;justify-content:space-between;font-size:12px;color:#64748b;margin-bottom:3px}
-.bill-total-row{display:flex;justify-content:space-between;font-size:16px;font-weight:800;color:#0f172a;margin:8px 0}
+.bill-item{padding:9px 0;border-bottom:1px solid #f1f5f9}
+.bill-item-name{font-size:13px;font-weight:700;color:#0f172a}
+.bill-item-price{font-size:13px;font-weight:800;color:#0f172a}
+.bill-del{color:#e11d48;cursor:pointer;font-size:16px;padding:4px 6px;line-height:1}
+/* Multi-staff selector in bill */
+.staff-sel-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.staff-sel-btn{padding:4px 10px;border-radius:20px;border:1.5px solid #e2e8f0;background:white;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.staff-sel-btn.sel{background:#e11d48;color:white;border-color:#e11d48}
+/* Customer alerts in POS */
+.cust-alert{padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.cust-alert-pending{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.cust-alert-membership{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+/* Bill totals bigger */
+.bill-row{display:flex;justify-content:space-between;font-size:13px;color:#64748b;margin-bottom:4px}
+.bill-total-row{display:flex;justify-content:space-between;font-size:18px;font-weight:900;color:#0f172a;margin:10px 0;padding-top:8px;border-top:2px solid #0f172a}
 .disc-row{display:flex;gap:5px;margin-bottom:8px;align-items:center}
-.disc-row input{flex:1;padding:8px;border-radius:6px;border:1px solid #e2e8f0;font-size:14px;background:white}
-.disc-row select{padding:8px 6px;border-radius:6px;border:1px solid #e2e8f0;font-size:12px;background:white}
-.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.pay-btn{padding:10px 8px;border-radius:8px;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:12px;font-weight:700;transition:all 0.15s;text-align:center;-webkit-tap-highlight-color:transparent}
+.disc-row input{flex:1;padding:9px;border-radius:6px;border:1px solid #e2e8f0;font-size:14px;background:white}
+.disc-row select{padding:9px 6px;border-radius:6px;border:1px solid #e2e8f0;font-size:12px;background:white}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
+.pay-btn{padding:11px 6px;border-radius:8px;border:1.5px solid #e2e8f0;background:white;cursor:pointer;font-size:12px;font-weight:700;transition:all .15s;text-align:center;-webkit-tap-highlight-color:transparent}
 .pay-btn.sel{background:#0d9488;color:white;border-color:#0d9488}
-.checkout-btn{width:100%;padding:14px;border-radius:10px;background:#e11d48;color:white;font-size:15px;font-weight:800;border:none;cursor:pointer;transition:background 0.15s;letter-spacing:0.3px}
+.checkout-btn{width:100%;padding:15px;border-radius:10px;background:#e11d48;color:white;font-size:16px;font-weight:900;border:none;cursor:pointer;transition:background .15s;letter-spacing:.3px}
 .checkout-btn:hover{background:#be123c}
-.cust-sel{width:100%;padding:8px;border-radius:8px;border:1px solid #e2e8f0;font-size:14px;margin-bottom:8px;background:white}
+.cust-sel{width:100%;padding:10px;border-radius:8px;border:1.5px solid #e2e8f0;font-size:14px;margin-bottom:4px;background:white}
 /* CALENDAR — legacy week grid */
 .cal-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .cal-nav button{padding:6px 12px;border-radius:6px;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:14px}
@@ -283,14 +314,87 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
 .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#64748b;margin-bottom:5px}
 .leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+/* ── TOP NAV LAYOUT (replaces sidebar) ───────────────── */
+:root{--topstore-h:50px;--topnav-h:78px;--total-nav:128px}
+#app-screen{flex-direction:column!important}
+.sidebar,.sb-overlay,.hamburger{display:none!important}
+.main{margin-left:0!important;flex:1;display:flex;flex-direction:column;min-height:100vh}
+/* Hide old topbar */
+.topbar{display:none!important}
+/* Store header bar */
+.store-topbar{height:var(--topstore-h);background:#0f172a;display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0;gap:10px;z-index:10}
+.store-brand{display:flex;align-items:center;gap:10px}
+.store-brand-ic{width:30px;height:30px;background:#e11d48;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.store-brand-name{font-size:14px;font-weight:800;color:#fff}
+.store-brand-plan{font-size:10px;color:rgba(255,255,255,.35);font-weight:500;margin-top:1px}
+.store-right{display:flex;align-items:center;gap:8px}
+.store-user-chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 6px}
+.store-av{width:24px;height:24px;border-radius:50%;background:#e11d48;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0}
+.store-uname{font-size:12px;font-weight:700;color:#fff}
+.store-logout{background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);font-size:11px;font-weight:700;cursor:pointer;padding:4px 10px;border-radius:6px}
+.store-logout:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+.online-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block}
+/* Top navigation pill buttons */
+.top-nav-bar{height:var(--topnav-h);background:#fff;border-bottom:2px solid #f1f5f9;display:flex;align-items:center;padding:0 14px;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-shrink:0;scrollbar-width:none;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.top-nav-bar::-webkit-scrollbar{display:none}
+.tnb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 14px;border-radius:14px;border:1.5px solid #f1f5f9;background:#fafafa;cursor:pointer;transition:all .15s;flex-shrink:0;min-width:66px;position:relative;-webkit-tap-highlight-color:transparent}
+.tnb:hover{border-color:#fda4af;background:#fff1f2}
+.tnb.active{background:#e11d48;border-color:#e11d48;box-shadow:0 4px 12px rgba(225,29,72,.3)}
+.tnb-ic{font-size:24px;line-height:1;display:block}
+.tnb-lbl{font-size:10px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:.3px}
+.tnb.active .tnb-lbl{color:#fff}
+.tnb-bdg{position:absolute;top:5px;right:5px;background:#0f172a;color:#fff;font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px}
+.tnb.active .tnb-bdg{background:#fff;color:#e11d48}
+/* Content area adjustments */
+.day-cal-wrap{height:calc(100vh - var(--total-nav) - 8px)!important}
+.cust-grid{height:calc(100vh - var(--total-nav) - 24px)}
 /* BOTTOM NAV — mobile only */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--bottom-nav-h);background:white;border-top:1px solid #e2e8f0;z-index:90;padding:0;padding-bottom:env(safe-area-inset-bottom,0px)}
 .bottom-nav-items{display:flex;height:100%;width:100%}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;color:#94a3b8;font-size:11px;font-weight:600;padding:8px 4px 4px;border:none;background:none;-webkit-tap-highlight-color:transparent;transition:all 0.15s;min-width:0;width:100%}
+.tnb-ic{font-size:22px;line-height:1;display:block}
 .bnav-item.active{color:#e11d48}.bnav-item.active .bnav-icon{transform:scale(1.1)}
 .bnav-icon{font-size:22px;line-height:1;display:block}
-/* HIDDEN */
+/* HIDDEN — single rule that hides all inactive pages */
 .hidden{display:none!important}
+/* ── THERMAL RECEIPT ──────────────────────────────────────── */
+.receipt-preview{
+  width:302px;/* 80mm ≈ 302px at 96dpi */
+  background:white;
+  font-family:'Courier New',Courier,monospace;
+  font-size:12px;
+  color:#000;
+  padding:12px 14px;
+  line-height:1.55;
+  border:1px dashed #e2e8f0;
+  border-radius:8px;
+  margin:0 auto;
+}
+.receipt-preview .r-center{text-align:center}
+.receipt-preview .r-bold{font-weight:700}
+.receipt-preview .r-lg{font-size:15px;font-weight:700}
+.receipt-preview .r-xl{font-size:18px;font-weight:900;letter-spacing:1px}
+.receipt-preview .r-line{border-top:1px dashed #555;margin:6px 0}
+.receipt-preview .r-row{display:flex;justify-content:space-between;align-items:flex-start}
+.receipt-preview .r-row .r-name{flex:1;margin-right:8px}
+.receipt-preview .r-footer{font-size:10px;text-align:center;color:#555;margin-top:4px}
+.receipt-preview .r-pts{background:#000;color:#fff;text-align:center;padding:4px 0;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+@media print{
+  @page{
+    size:80mm auto;
+    margin:0;
+  }
+  body > *:not(#receipt-print-frame){display:none!important}
+  #receipt-print-frame{
+    display:block!important;
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    z-index:99999;
+    background:white;
+  }
+}
+/* receipt modal wider */
+.modal.receipt-modal{max-width:380px}
 /* SCROLLBAR desktop */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -309,57 +413,43 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
 
 /* ── MOBILE (≤640px) ────────────────────────── */
 @media(max-width:640px){
-  :root{--topbar-h:54px;--bottom-nav-h:62px}
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .sidebar-overlay{display:none}
-  .sidebar-overlay.show{display:block}
-  .hamburger{display:flex;align-items:center;justify-content:center}
-  .main{margin-left:0;padding-bottom:var(--bottom-nav-h)}
+  :root{--total-nav:108px;--bottom-nav-h:62px}
+  .main{padding-bottom:var(--bottom-nav-h)}
   .bottom-nav{display:flex}
   #offline-lbl{display:none}
   .login-box{padding:32px 24px;border-radius:16px}
   .content{padding:14px}
-  /* KPI 2-col, bigger text */
   .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
   .kpi-card{padding:18px 16px}
   .kpi-value{font-size:24px}
   .kpi-label{font-size:12px}
   .report-kpis{grid-template-columns:repeat(2,1fr);gap:10px}
-  /* Dashboard single col */
   .dash-grid{grid-template-columns:1fr}
   .report-grid{grid-template-columns:1fr}
   .staff-grid-cards{grid-template-columns:1fr}
-  /* POS mobile layout */
-  .pos-fullbleed{margin:-14px!important;height:auto!important;overflow:visible!important}
+  .pos-fullbleed{margin:-14px -14px!important;height:auto!important;overflow:visible!important}
   .pos-wrap{grid-template-columns:1fr;height:auto}
-  .pos-right{display:none}
+  .pos-right{display:none!important}
   .pos-left{padding:14px!important;overflow-y:visible}
   .svc-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .svc-btn{padding:16px 12px}
+  .svc-btn{padding:16px 12px;min-height:100px}
   .svc-icon{font-size:28px;margin-bottom:8px}
   .svc-n{font-size:13px}
   .svc-p{font-size:14px}
-  .pos-bill-fab{display:flex;align-items:center;gap:6px}
+  .pos-bill-fab{display:flex!important;align-items:center;gap:6px}
   .pos-bill-drawer{display:block}
-  /* Calendar scroll */
-  .cal-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .cal-hdr{gap:6px}
-  .cal-date-lbl{font-size:13px}
-  /* Customers single col */
   .cust-grid{grid-template-columns:1fr;height:auto}
   .cust-list-wrap{max-height:300px}
-  /* Table scroll */
   .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
   .inv-table{min-width:640px}
-  /* Modals bottom sheet */
   .modal-overlay{align-items:flex-end}
   .modal{border-radius:20px 20px 0 0;max-width:100%;padding:22px 20px 36px}
-  /* Toast above bottom nav */
   .toast{bottom:calc(var(--bottom-nav-h) + 14px);font-size:14px}
-  #top-btn{padding:9px 14px;font-size:12px}
   .admin-tabs{gap:0}
   .admin-tab{padding:11px 14px;font-size:12px}
+  .tnb{min-width:54px;padding:6px 10px}
+  .tnb-ic{font-size:20px}
+  .tnb-lbl{font-size:9px}
 }
 
 /* ── VERY SMALL (≤380px) ────────────────────── */
@@ -419,38 +509,33 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
 
 <!-- APP -->
 <div id="app-screen">
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-logo">
-      <div class="brand-mark">✦ SaaS Salon</div>
-      <div class="brand-sub" id="sidebar-store-name">Dawa Belle</div>
-    </div>
-    <div class="nav-section" id="sidebar-nav"></div>
-    <div class="sidebar-footer">
-      <div class="user-chip">
-        <div class="avatar" id="nav-avatar">AD</div>
-        <div>
-          <div class="user-name" id="nav-uname">Admin</div>
-          <div class="user-role" id="nav-urole">Administrator</div>
-        </div>
-        <button class="logout-btn" onclick="logout()" title="Logout">⏏</button>
-      </div>
-    </div>
-  </div>
-
   <div class="main">
-    <div class="topbar">
-      <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">☰</button>
-      <div class="topbar-title" id="page-title">Dashboard</div>
-      <div class="topbar-right">
-        <span style="font-size:11px;color:#64748b" id="offline-lbl"><span class="online-dot"></span> Online</span>
-        <button class="btn btn-primary btn-sm" id="top-btn" onclick="topAction()">+ New</button>
+    <!-- Store header bar -->
+    <div class="store-topbar">
+      <div class="store-brand">
+        <div class="store-brand-ic">✦</div>
+        <div>
+          <div class="store-brand-name" id="sidebar-store-name">SaaS Salon</div>
+          <div class="store-brand-plan" id="nav-plan-lbl">POS</div>
+        </div>
+      </div>
+      <div class="store-right">
+        <span id="offline-lbl" style="font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px"><span class="online-dot"></span> Online</span>
+        <div class="store-user-chip">
+          <div class="store-av" id="nav-avatar">AD</div>
+          <div>
+            <div class="store-uname" id="nav-uname">Admin</div>
+          </div>
+        </div>
+        <button class="store-logout" onclick="logout()">Exit</button>
       </div>
     </div>
+    <!-- Top navigation pill buttons -->
+    <div class="top-nav-bar" id="top-nav-bar"></div>
     <div class="content" id="content-area">
 
       <!-- DASHBOARD -->
-      <div id="page-dashboard">
+      <div id="page-dashboard" class="hidden">
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px">
           <div class="kpi-card"><div class="kpi-label">Today's Revenue</div><div class="kpi-value" id="k-rev">QAR 0</div><div class="kpi-sub kpi-up" id="k-rev-sub"></div></div>
           <div class="kpi-card"><div class="kpi-label">Appointments</div><div class="kpi-value" id="k-appts">0</div><div class="kpi-sub" id="k-appts-sub"></div></div>
@@ -475,19 +560,25 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
       <div id="page-pos" class="hidden pos-fullbleed">
         <div class="pos-wrap" style="height:100%">
           <div class="pos-left">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <!-- Mode selector: Services / Products / Packages / Membership -->
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;flex-wrap:wrap">
               <div style="display:flex;background:#f1f5f9;border-radius:10px;padding:3px;gap:2px">
-                <button id="pos-mode-svc" onclick="setPOSMode('service')" style="padding:7px 18px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;background:#e11d48;color:white;transition:all 0.2s">Services</button>
-                <button id="pos-mode-prd" onclick="setPOSMode('product')" style="padding:7px 18px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:#64748b;transition:all 0.2s">Products</button>
+                <button id="pos-mode-svc" onclick="setPOSMode('service')" style="padding:9px 16px;border-radius:8px;border:none;font-size:13px;font-weight:800;cursor:pointer;background:#e11d48;color:white;transition:all .2s">✂️ Services</button>
+                <button id="pos-mode-pkg" onclick="setPOSMode('package')" style="padding:9px 16px;border-radius:8px;border:none;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:#64748b;transition:all .2s">🎁 Packages</button>
+                <button id="pos-mode-mem" onclick="setPOSMode('membership')" style="padding:9px 16px;border-radius:8px;border:none;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:#64748b;transition:all .2s">💳 Memberships</button>
+                <button id="pos-mode-prd" onclick="setPOSMode('product')" style="padding:9px 16px;border-radius:8px;border:none;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:#64748b;transition:all .2s">📦 Products</button>
               </div>
-              <div style="font-size:12px;color:#94a3b8" id="pos-mode-hint">Select services to add to bill</div>
             </div>
             <div class="cat-tabs" id="pos-cats"></div>
             <div class="svc-grid" id="pos-svcs"></div>
           </div>
           <div class="pos-right">
-            <select class="cust-sel" id="pos-cust"><option value="">Walk-in Customer</option></select>
-            <div class="bill-hdr">Current Bill — <span style="color:#94a3b8;font-weight:400;font-size:12px" id="dawa-belle-lbl">Dawa Belle</span></div>
+            <!-- Customer selector with alert badges -->
+            <div style="margin-bottom:8px">
+              <select class="cust-sel" id="pos-cust" onchange="onCustChange(this.value)"><option value="">Walk-in Customer</option></select>
+              <div id="cust-alerts"></div>
+            </div>
+            <div class="bill-hdr">Current Bill</div>
             <div class="bill-items" id="bill-items"></div>
             <div class="bill-totals">
               <div class="disc-row">
@@ -498,19 +589,22 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
               <div class="bill-row"><span>Discount</span><span id="b-disc" style="color:#e11d48">-QAR 0</span></div>
               <div class="bill-total-row"><span>Total</span><span id="b-total">QAR 0</span></div>
               <div class="pay-grid">
-                <button class="pay-btn sel" onclick="selPay('cash',this)">💵 Cash</button>
-                <button class="pay-btn" onclick="selPay('card',this)">💳 Card</button>
-                <button class="pay-btn" onclick="selPay('split',this)">⚡ Split</button>
-                <button class="pay-btn" onclick="selPay('online',this)">📱 Online</button>
+                <button class="pay-btn sel" id="pay-cash" onclick="selPay('cash',this)">💵 Cash</button>
+                <button class="pay-btn" id="pay-card" onclick="selPay('card',this)">💳 Card</button>
+                <button class="pay-btn" id="pay-credit" onclick="selPay('credit',this)">🏷️ Credit</button>
+                <button class="pay-btn" id="pay-membership" onclick="selPay('membership',this)">💎 Membership</button>
+                <button class="pay-btn" id="pay-split" onclick="selPay('split',this)">⚡ Split</button>
+                <button class="pay-btn" id="pay-online" onclick="selPay('online',this)">📱 Online</button>
               </div>
               <button class="checkout-btn" onclick="checkout()">Complete Sale →</button>
+              <button onclick="previewReceipt()" style="width:100%;padding:11px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;color:#0f172a;font-size:13px;font-weight:700;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit">🖨️ Preview &amp; Print Bill</button>
             </div>
           </div>
         </div>
       </div>
 
       <!-- APPOINTMENTS -->
-      <div id="page-appointments" class="hidden" style="padding:0;margin:-20px -24px;height:calc(100vh - var(--topbar-h))">
+      <div id="page-appointments" class="hidden" style="padding:0;margin:-16px -20px;height:calc(100vh - var(--total-nav))">
         <div class="day-cal-wrap" style="height:100%;border-radius:0;border-left:none;border-right:none;border-bottom:none">
           <!-- Toolbar -->
           <div class="day-cal-toolbar">
@@ -661,7 +755,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
       <div id="page-admin" class="hidden">
         <div class="admin-tabs">
           <div class="admin-tab active" onclick="adminTab('employees',this)">👥 Employees</div>
-          <div class="admin-tab" onclick="adminTab('services',this)">💅 POS Services</div>
+          <div class="admin-tab" onclick="adminTab('services',this)">💅 Services</div>
+          <div class="admin-tab" onclick="adminTab('packages',this)">🎁 Packages</div>
+          <div class="admin-tab" onclick="adminTab('memberships',this)">💳 Memberships</div>
           <div class="admin-tab" onclick="adminTab('categories',this)">🗂 Categories</div>
           <div class="admin-tab" onclick="adminTab('settings',this)">⚙️ Settings</div>
         </div>
@@ -694,6 +790,24 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
           </div>
         </div>
 
+        <!-- PACKAGES TAB -->
+        <div class="admin-section" id="admin-packages">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div style="font-size:13px;color:#64748b" id="pkg-count-lbl"></div>
+            <button class="btn btn-primary btn-sm" onclick="showAddPackage()">+ Add Package</button>
+          </div>
+          <div id="pkg-list"></div>
+        </div>
+
+        <!-- MEMBERSHIPS TAB -->
+        <div class="admin-section" id="admin-memberships">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div style="font-size:13px;color:#64748b">Define membership/credit card plans</div>
+            <button class="btn btn-primary btn-sm" onclick="showAddMembership()">+ Add Membership</button>
+          </div>
+          <div id="mem-admin-list"></div>
+        </div>
+
         <!-- CATEGORIES TAB -->
         <div class="admin-section" id="admin-categories">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
@@ -705,18 +819,47 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
 
         <!-- SETTINGS TAB -->
         <div class="admin-section" id="admin-settings">
-          <div class="card" style="max-width:480px">
-            <div class="card-title">Salon Settings</div>
-            <div class="form-row"><label>Salon Name</label><input type="text" id="set-name" value="Dawa Belle"></div>
-            <div class="form-row"><label>Currency</label><select id="set-currency"><option value="QAR" selected>QAR — Qatari Riyal</option><option value="AED">AED — UAE Dirham</option><option value="SAR">SAR — Saudi Riyal</option><option value="USD">USD — US Dollar</option></select></div>
-            <div class="form-row"><label>Tax %</label><input type="number" id="set-tax" value="0" min="0" max="30"></div>
-            <div class="form-row"><label>Loyalty Points per QAR 10</label><input type="number" id="set-pts" value="1" min="0"></div>
-            <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px">
+
+            <!-- General Settings -->
+            <div class="card">
+              <div class="card-title">⚙️ General Settings</div>
+              <div class="form-row"><label>Salon Name</label><input type="text" id="set-name" value="Dawa Belle"></div>
+              <div class="form-row"><label>Currency</label><select id="set-currency"><option value="QAR" selected>QAR — Qatari Riyal</option><option value="AED">AED — UAE Dirham</option><option value="SAR">SAR — Saudi Riyal</option><option value="USD">USD — US Dollar</option><option value="GBP">GBP — British Pound</option></select></div>
+              <div class="form-row"><label>Tax %</label><input type="number" id="set-tax" value="0" min="0" max="30"></div>
+              <div class="form-row"><label>Loyalty — Points per QAR 1 spent</label><input type="number" id="set-pts-earn" value="10" min="1"></div>
+              <div class="form-row"><label>Loyalty — Points needed for QAR 1 off</label><input type="number" id="set-pts-redeem" value="100" min="1">
+                <div style="font-size:11px;color:#94a3b8;margin-top:3px">e.g. 100 pts = QAR 1 discount</div>
+              </div>
+              <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+            </div>
+
+            <!-- Receipt / Store Details -->
+            <div class="card">
+              <div class="card-title">🧾 Receipt / Store Details</div>
+              <div class="form-row"><label>Store Logo / Symbol</label><input type="text" id="set-r-logo" placeholder="✦ or your initials" value="✦" maxlength="10"></div>
+              <div class="form-row"><label>Tagline</label><input type="text" id="set-r-tag" placeholder="Beauty is our passion" value="Beauty is our passion"></div>
+              <div class="form-row"><label>Address Line</label><input type="text" id="set-r-addr" placeholder="The Pearl, Doha, Qatar"></div>
+              <div class="form-row"><label>Phone</label><input type="tel" id="set-r-phone" placeholder="+974 4411 5500"></div>
+              <div class="form-row"><label>VAT / Tax Number (optional)</label><input type="text" id="set-r-vat" placeholder="VAT: 300123456789"></div>
+              <div class="form-row"><label>Footer Message</label><textarea id="set-r-footer" style="min-height:56px;resize:none" placeholder="Thank you! Book again: wa.me/974…" class="form-row input"></textarea></div>
+              <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="set-r-tax" style="width:16px;height:16px"> Show tax on receipt</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="set-r-pts" checked style="width:16px;height:16px"> Show loyalty points</label>
+              </div>
+              <div class="form-row"><label>Paper Size</label>
+                <select id="set-r-paper"><option value="80mm" selected>80mm Thermal</option><option value="58mm">58mm Thermal</option><option value="A4">A4</option></select>
+              </div>
+              <button class="btn btn-primary" onclick="saveSettings()">Save Receipt Settings</button>
+              <button class="btn" style="margin-left:8px" onclick="previewReceipt()">Preview Receipt</button>
+            </div>
+
           </div>
-          <div class="card" style="max-width:480px;margin-top:12px">
+
+          <div class="card" style="max-width:480px;margin-top:14px">
             <div class="card-title" style="color:#e11d48">Danger Zone</div>
             <p style="font-size:12px;color:#64748b;margin-bottom:10px">These actions cannot be undone.</p>
-            <button class="btn btn-danger btn-sm" onclick="if(confirm('Reset ALL data?')){localStorage.removeItem('solopos_data');location.reload()}">Reset All Data</button>
+            <button class="btn btn-danger btn-sm" onclick="if(confirm('Reset ALL data?')){localStorage.removeItem(DB_KEY);location.reload()}">Reset All Data</button>
           </div>
         </div>
 
@@ -744,21 +887,22 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:1
       <div class="bill-row"><span>Subtotal</span><span id="b-sub-mob">QAR 0</span></div>
       <div class="bill-row"><span>Discount</span><span id="b-disc-mob" style="color:#e11d48">-QAR 0</span></div>
       <div class="bill-total-row"><span>Total</span><span id="b-total-mob">QAR 0</span></div>
-      <div class="pay-grid">
+      <div class="pay-grid" style="grid-template-columns:1fr 1fr 1fr">
         <button class="pay-btn sel" onclick="selPay('cash',this)">💵 Cash</button>
         <button class="pay-btn" onclick="selPay('card',this)">💳 Card</button>
+        <button class="pay-btn" onclick="selPay('credit',this)">🏷️ Credit</button>
+        <button class="pay-btn" onclick="selPay('membership',this)">💎 Membership</button>
         <button class="pay-btn" onclick="selPay('split',this)">⚡ Split</button>
         <button class="pay-btn" onclick="selPay('online',this)">📱 Online</button>
       </div>
       <button class="checkout-btn" onclick="checkout()">Complete Sale →</button>
-    </div>
-  </div>
+      <button onclick="previewReceipt()" style="width:100%;padding:11px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;color:#0f172a;font-size:13px;font-weight:700;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit">🖨️ Preview &amp; Print Bill</button>
 
-  <!-- BOTTOM NAV (mobile) -->
   <nav class="bottom-nav" id="bottom-nav">
     <div class="bottom-nav-items" id="bnav-items"></div>
   </nav>
-</div>
+  </div><!-- end main -->
+</div><!-- end app-screen -->
 
 <div id="modal-root"></div>
 <div id="toast-root"></div>
@@ -769,7 +913,23 @@ const PLATFORM_KEY = 'saassalon_v2'; // shared with admin panel
 let DB_KEY = 'solopos_data';         // overridden per store on login
 
 const seed = {
-  settings:{name:'Dawa Belle',currency:'QAR',tax:0,pts:1},
+  settings:{
+    name:'Dawa Belle',
+    currency:'QAR',
+    tax:0,
+    ptsEarn:10,
+    ptsRedeem:100,
+    // Receipt / Invoice settings
+    receiptLogo:'✦',
+    receiptTagline:'Beauty is our passion',
+    receiptAddress:'The Pearl, Doha, Qatar',
+    receiptPhone:'+974 4411 5500',
+    receiptVat:'',
+    receiptFooter:'Thank you for visiting! Book again: wa.me/97455123456',
+    receiptShowTax:false,
+    receiptShowPoints:true,
+    receiptPaper:'80mm',
+  },
   categories:['Hair','Nails','Skin','Body'],
   services:[
     {id:1,name:'Haircut',cat:'Hair',price:120,duration:45,icon:'✂️'},
@@ -785,6 +945,19 @@ const seed = {
     {id:11,name:'Massage',cat:'Body',price:300,duration:60,icon:'🧖'},
     {id:12,name:'Body Wrap',cat:'Body',price:400,duration:90,icon:'🌿'},
   ],
+  packages:[
+    {id:1,name:'Bride Package',services:[{serviceId:2,name:'Hair Color'},{serviceId:5,name:'Manicure'},{serviceId:8,name:'Facial'}],price:600,duration:180,icon:'👰',description:'Full bridal beauty prep'},
+    {id:2,name:'Hair & Nails Combo',services:[{serviceId:1,name:'Haircut'},{serviceId:7,name:'Gel Nails'}],price:280,duration:120,icon:'✨',description:'Haircut + gel nails at special price'},
+    {id:3,name:'Spa Day',services:[{serviceId:11,name:'Massage'},{serviceId:8,name:'Facial'},{serviceId:12,name:'Body Wrap'}],price:850,duration:210,icon:'🧖',description:'Full spa relaxation package'},
+  ],
+  memberships:[
+    {id:1,name:'Silver Card',price:500,description:'QAR 500 credit — use on any service',icon:'🥈'},
+    {id:2,name:'Gold Card',price:1000,description:'QAR 1000 credit + 10% bonus = QAR 1100',icon:'🥇',bonus:100},
+    {id:3,name:'Platinum Card',price:2000,description:'QAR 2000 credit + 15% bonus = QAR 2300',icon:'💳',bonus:300},
+  ],
+  customerMemberships:[
+    {id:1,customerId:1,membershipId:2,name:'Gold Card',totalCredit:1100,usedCredit:200,balance:900,purchaseDate:'2026-04-01',status:'active'},
+  ],
   users:[
     {id:1,username:'admin',password:'1234',name:'Admin User',role:'admin',staffId:null,active:true},
   ],
@@ -796,16 +969,16 @@ const seed = {
     {id:5,name:'Sara Hassan',role:'Therapist',skills:['Body','Skin'],commission:13,color:'#16a34a',sales:2100,appts:17,userId:null},
   ],
   customers:[
-    {id:1,name:'Fatima Al-Dosari',phone:'+974 5512 3456',email:'fatima@email.com',points:240,visits:[
+    {id:1,name:'Fatima Al-Dosari',phone:'+974 5512 3456',email:'fatima@email.com',points:240,creditBalance:0,pendingAmount:0,visits:[
       {date:'2026-04-15',service:'Haircut + Color',amount:470,staff:'Aisha Rahman'},
       {date:'2026-03-22',service:'Manicure',amount:100,staff:'Lara Khalid'},
     ],note:'Prefers Aisha. Allergic to ammonia.'},
-    {id:2,name:'Mariam Jaber',phone:'+974 5598 7654',email:'mariam@email.com',points:120,visits:[
+    {id:2,name:'Mariam Jaber',phone:'+974 5598 7654',email:'mariam@email.com',points:120,creditBalance:900,pendingAmount:0,visits:[
       {date:'2026-04-08',service:'Gel Nails',amount:200,staff:'Lara Khalid'},
-    ],note:'VIP client.'},
-    {id:3,name:'Layla Mohammed',phone:'+974 5533 4422',email:'layla@email.com',points:310,visits:[
+    ],note:'VIP client. Has Gold Card.'},
+    {id:3,name:'Layla Mohammed',phone:'+974 5533 4422',email:'layla@email.com',points:310,creditBalance:0,pendingAmount:150,visits:[
       {date:'2026-04-14',service:'Massage',amount:300,staff:'Sara Hassan'},
-    ],note:'Gold member.'},
+    ],note:'Gold member. Pending QAR 150.'},
   ],
   inventory:[
     {id:1,name:'Olaplex No.3',cat:'Treatment',stock:8,minStock:5,price:185,supplier:'Olaplex',isLiquid:true,volumeMl:100,currentMl:680,dailyUsageMl:22,openedDate:'2026-04-01'},
@@ -968,8 +1141,9 @@ function doLogin(){
   document.getElementById('app-screen').style.display='flex';
   document.getElementById('nav-avatar').textContent=currentUser.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
   document.getElementById('nav-uname').textContent=currentUser.name;
-  document.getElementById('nav-urole').textContent=currentUser.role==='admin'?'Administrator':currentUser.role==='cashier'?'Cashier':'Staff';
-  document.getElementById('sidebar-store-name').textContent=db.settings.name;
+  document.getElementById('sidebar-store-name').textContent=db.settings.name||currentBranch.name;
+  const planEl=document.getElementById('nav-plan-lbl');
+  if(planEl)planEl.textContent=(PLAN_NAMES[currentBranch.plan]||currentBranch.plan)+' · '+currentBranch.currency;
   buildNav();
   navTo('dashboard');
 }
@@ -990,46 +1164,49 @@ function logout(){
 
 // Role-based nav
 const allNavItems=[
-  {id:'dashboard',icon:'◈',label:'Dashboard',roles:['admin','cashier','staff']},
-  {id:'pos',icon:'⊡',label:'Point of Sale',roles:['admin','cashier'],badge:'POS'},
-  {id:'appointments',icon:'▦',label:'Appointments',roles:['admin','staff','cashier']},
-  {id:'customers',icon:'◉',label:'Customers',roles:['admin','cashier']},
-  {id:'staff',icon:'◈',label:'Staff',roles:['admin']},
-  {id:'inventory',icon:'▣',label:'Inventory',roles:['admin']},
+  {id:'dashboard',icon:'🏠',label:'Dashboard',roles:['admin','cashier','staff']},
+  {id:'pos',icon:'🖥️',label:'Point of Sale',roles:['admin','cashier'],badge:'POS'},
+  {id:'appointments',icon:'📅',label:'Appointments',roles:['admin','staff','cashier']},
+  {id:'customers',icon:'👤',label:'Customers',roles:['admin','cashier']},
+  {id:'staff',icon:'💇',label:'Staff',roles:['admin']},
+  {id:'inventory',icon:'📦',label:'Inventory',roles:['admin']},
   {id:'purchase',icon:'🛒',label:'Purchases',roles:['admin']},
   {id:'suppliers',icon:'🏭',label:'Suppliers',roles:['admin']},
   {id:'expenses',icon:'💸',label:'Expenses',roles:['admin']},
   {id:'attendance',icon:'🕐',label:'Attendance',roles:['admin','staff']},
-  {id:'reports',icon:'◧',label:'Reports',roles:['admin']},
-  {id:'admin',icon:'⚙',label:'Admin Panel',roles:['admin']},
+  {id:'reports',icon:'📊',label:'Reports',roles:['admin']},
+  {id:'admin',icon:'⚙️',label:'Admin Panel',roles:['admin']},
 ];
 
 // Bottom nav items (most important pages only for mobile)
 const bottomNavPages=['dashboard','pos','appointments','customers','reports'];
-const bnavIcons={dashboard:'◈',pos:'⊡',appointments:'▦',customers:'◉',reports:'◧'};
+const bnavIcons={dashboard:'🏠',pos:'🖥️',appointments:'📅',customers:'👤',reports:'📊'};
 const bnavLabels={dashboard:'Home',pos:'POS',appointments:'Appts',customers:'CRM',reports:'Reports'};
 
 function buildNav(){
   const role=currentUser?.role||'staff';
   const items=allNavItems.filter(n=>n.roles.includes(role));
-  document.getElementById('sidebar-nav').innerHTML=`<div class="nav-label">Menu</div>`+items.map(n=>
-    `<div class="nav-item" id="nav-${n.id}" onclick="navTo('${n.id}');closeSidebar()"><span class="icon">${n.icon}</span>${n.label}${n.badge?`<span class="nav-badge">${n.badge}</span>`:''}</div>`
-  ).join('');
-  // Build bottom nav from allowed pages
+  // Build top nav pill buttons
+  const navBar=document.getElementById('top-nav-bar');
+  if(navBar){
+    navBar.innerHTML=items.map(n=>
+      `<div class="tnb" id="nav-${n.id}" onclick="navTo('${n.id}')">
+        <span class="tnb-ic">${n.icon}</span>
+        <span class="tnb-lbl">${n.label}</span>
+        ${n.badge?`<span class="tnb-bdg">${n.badge}</span>`:''}
+      </div>`
+    ).join('');
+  }
+  // Build bottom nav (mobile only)
   const bItems=bottomNavPages.filter(p=>items.find(i=>i.id===p));
-  document.getElementById('bnav-items').innerHTML=bItems.map(p=>
+  const bnavEl=document.getElementById('bnav-items');
+  if(bnavEl) bnavEl.innerHTML=bItems.map(p=>
     `<button class="bnav-item" id="bnav-${p}" onclick="navTo('${p}')"><span class="bnav-icon">${bnavIcons[p]}</span>${bnavLabels[p]||p}</button>`
   ).join('');
 }
 
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebar-overlay').classList.toggle('show');
-}
-function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebar-overlay').classList.remove('show');
-}
+function toggleSidebar(){} // no-op — no sidebar
+function closeSidebar(){}  // no-op
 
 let currentPage='dashboard';
 let posCat='All';
@@ -1042,22 +1219,20 @@ const PAGE_TITLES={dashboard:'Dashboard',pos:'Point of Sale',appointments:'Appoi
 const PAGE_BTN={dashboard:'+ New',pos:'Clear',appointments:'+ Book',customers:'+ Add',staff:'+ Add',inventory:'+ Add',purchase:'+ New Purchase',suppliers:'+ Add Supplier',expenses:'+ Add Expense',attendance:'Check In',reports:'Export',admin:''};
 
 function navTo(page){
-  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  // Highlight active top-nav button
+  document.querySelectorAll('.tnb').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.bnav-item').forEach(el=>el.classList.remove('active'));
   const el=document.getElementById('nav-'+page);
   if(el)el.classList.add('active');
   const bel=document.getElementById('bnav-'+page);
   if(bel)bel.classList.add('active');
+  // Show page
   document.querySelectorAll('[id^="page-"]').forEach(el=>{el.classList.add('hidden');el.style.display='';});
   const pg=document.getElementById('page-'+page);
+  if(!pg)return;
   pg.classList.remove('hidden');
-  // Appointments uses block (flex layout is inside the page div)
   if(page==='appointments')pg.style.display='block';
   currentPage=page;
-  document.getElementById('page-title').textContent=PAGE_TITLES[page]||page;
-  const btn=document.getElementById('top-btn');
-  btn.textContent=PAGE_BTN[page]||'';
-  btn.style.display=PAGE_BTN[page]?'':'none';
   const fab=document.getElementById('pos-bill-fab');
   if(fab) fab.style.display=(page==='pos'&&window.innerWidth<=640)?'flex':'none';
   if(page!=='pos') closeBillDrawer();
@@ -1225,27 +1400,34 @@ function renderDashboard(){
 }
 
 // ─── POS ─────────────────────────────────────────────────────────
-let posMode='service'; // 'service' | 'product'
+let posMode='service'; // 'service' | 'package' | 'membership' | 'product'
 
 function setPOSMode(mode){
   posMode=mode;
-  const sb=document.getElementById('pos-mode-svc');
-  const pb=document.getElementById('pos-mode-prd');
-  const hint=document.getElementById('pos-mode-hint');
-  if(sb){sb.style.background=mode==='service'?'#e11d48':'transparent';sb.style.color=mode==='service'?'white':'#64748b';}
-  if(pb){pb.style.background=mode==='product'?'#0d9488':'transparent';pb.style.color=mode==='product'?'white':'#64748b';}
-  if(hint)hint.textContent=mode==='service'?'Select services to add to bill':'Select retail products to sell';
+  const modes=['svc','pkg','mem','prd'];
+  const modeKeys=['service','package','membership','product'];
+  const colors={service:'#e11d48',package:'#7c3aed',membership:'#d97706',product:'#0d9488'};
+  modes.forEach((m,i)=>{
+    const el=document.getElementById('pos-mode-'+m);
+    if(!el)return;
+    const active=modeKeys[i]===mode;
+    el.style.background=active?colors[mode]:'transparent';
+    el.style.color=active?'white':'#64748b';
+  });
   posCat='All';
   renderPOS();
 }
 
 function renderPOS(){
   const cur=db.settings.currency;
+  const catsEl=document.getElementById('pos-cats');
+  const svcsEl=document.getElementById('pos-svcs');
+
   if(posMode==='service'){
     const cats=['All',...db.categories];
-    document.getElementById('pos-cats').innerHTML=cats.map(c=>`<div class="cat-tab ${c===posCat?'active':''}" onclick="setPOSCat('${c}')">${c}</div>`).join('');
+    catsEl.innerHTML=cats.map(c=>`<div class="cat-tab ${c===posCat?'active':''}" onclick="setPOSCat('${c}')">${c}</div>`).join('');
     const svcs=posCat==='All'?db.services:db.services.filter(s=>s.cat===posCat);
-    document.getElementById('pos-svcs').innerHTML=svcs.map(s=>{
+    svcsEl.innerHTML=svcs.map(s=>{
       const added=billItems.some(b=>b.billId===`svc-${s.id}`);
       return`<div class="svc-btn ${added?'added':''}" onclick="addServiceToBill(${s.id})">
         <span class="svc-icon">${s.icon}</span>
@@ -1254,23 +1436,67 @@ function renderPOS(){
         <span class="svc-t">${s.duration} min</span>
       </div>`;
     }).join('');
-  } else {
-    // Product mode — show inventory items with sellPrice
+
+  } else if(posMode==='package'){
+    catsEl.innerHTML='';
+    const pkgs=db.packages||[];
+    svcsEl.style.gridTemplateColumns='repeat(auto-fill,minmax(200px,1fr))';
+    svcsEl.innerHTML=pkgs.map(p=>{
+      const added=billItems.some(b=>b.billId===`pkg-${p.id}`);
+      // Calculate original price
+      const origPrice=p.services.reduce((a,si)=>{const svc=db.services.find(x=>x.id===si.serviceId);return a+(svc?.price||0);},0);
+      const saving=origPrice-p.price;
+      return`<div class="pkg-card ${added?'added':''}" onclick="addPackageToBill(${p.id})">
+        <span class="pkg-icon">${p.icon}</span>
+        <div class="pkg-n">${p.name}</div>
+        <div class="pkg-svcs">${p.services.map(s=>s.name).join(' + ')}</div>
+        <div class="pkg-p">${cur} ${p.price}</div>
+        ${saving>0?`<span class="pkg-save">Save ${cur} ${saving}</span>`:''}
+        <div style="font-size:11px;color:#94a3b8;margin-top:4px">${p.duration} min total</div>
+      </div>`;
+    }).join('') || '<div style="text-align:center;padding:40px;color:#94a3b8">No packages defined yet. Add them in Admin Panel.</div>';
+
+  } else if(posMode==='membership'){
+    catsEl.innerHTML='';
+    const mems=db.memberships||[];
+    const earnRate=db.settings.ptsEarn||10;
+    const redeemRate=db.settings.ptsRedeem||100;
+    svcsEl.style.gridTemplateColumns='repeat(auto-fill,minmax(180px,1fr))';
+    const info=`<div style="grid-column:1/-1;background:#fefce8;border:1.5px solid #fde047;border-radius:10px;padding:14px;font-size:12px;color:#713f12;margin-bottom:8px">
+      <div style="font-size:14px;font-weight:800;margin-bottom:6px">⭐ Loyalty Points Program</div>
+      <div>Customers earn <strong>${earnRate} points per ${cur} 1</strong> on every purchase.</div>
+      <div style="margin-top:3px">Redeem: <strong>${redeemRate} points = ${cur} 1 discount</strong>.</div>
+      <div style="margin-top:3px;color:#a16207">Points are saved by phone number. Select customer in POS → tap "Use Points" to redeem.</div>
+    </div>`;
+    svcsEl.innerHTML=info+(mems.length>0?mems.map(m=>`<div class="mem-card" onclick="addMembershipToBill(${m.id})">
+      <span class="mem-icon">${m.icon}</span>
+      <div class="mem-n">${m.name}</div>
+      <div class="mem-desc">${m.description}</div>
+      <div class="mem-price">${cur} ${m.price}</div>
+    </div>`).join(''):'<div style="grid-column:1/-1;text-align:center;padding:30px;color:#94a3b8">No credit membership cards defined. Add them in Admin → Memberships.</div>');
+
+  } else if(posMode==='product'){
     const cats=['All',...new Set(db.inventory.map(i=>i.cat))];
-    document.getElementById('pos-cats').innerHTML=cats.map(c=>`<div class="cat-tab ${c===posCat?'active':''}" onclick="setPOSCat('${c}')">${c}</div>`).join('');
+    catsEl.innerHTML=cats.map(c=>`<div class="cat-tab ${c===posCat?'active':''}" onclick="setPOSCat('${c}')">${c}</div>`).join('');
     const prods=posCat==='All'?db.inventory:db.inventory.filter(i=>i.cat===posCat);
-    document.getElementById('pos-svcs').innerHTML=prods.map(p=>{
-      const outOfStock=p.stock<=0;
-      const sellPrice=p.sellPrice||Math.round(p.price*1.4); // default markup 40%
+    svcsEl.style.gridTemplateColumns='repeat(3,1fr)';
+    svcsEl.innerHTML=prods.map(p=>{
+      const oos=p.stock<=0;
+      const sp=p.sellPrice||Math.round(p.price*1.4);
       const added=billItems.some(b=>b.billId===`prd-${p.id}`);
-      return`<div class="svc-btn ${added?'added':''} ${outOfStock?'out-of-stock':''}" onclick="${outOfStock?'showToast(\'Out of stock\',\'warn\')':'addProductToBill('+p.id+')'}">
-        <span class="svc-icon">${p.isLiquid?'💧':'📦'}</span>
+      const imgHtml=p.imageData
+        ?`<img src="${p.imageData}" class="prod-img" style="display:block">`
+        :`<div class="prod-img"><span style="font-size:2rem">${p.isLiquid?'💧':'📦'}</span></div>`;
+      return`<div class="svc-btn ${added?'added':''} ${oos?'out-of-stock':''}" onclick="${oos?'showToast(\'Out of stock\',\'warn\')':'addProductToBill('+p.id+')'}" style="padding:12px">
+        ${imgHtml}
         <span class="svc-n">${p.name}</span>
-        <span class="svc-p">${cur} ${sellPrice}</span>
-        <span class="svc-t" style="${outOfStock?'color:#e11d48;font-weight:700':''}">Stock: ${p.stock}${outOfStock?' — OUT':''}</span>
+        <span class="svc-p">${cur} ${sp}</span>
+        <span class="svc-t" style="${oos?'color:#e11d48;font-weight:700':''}">Stock: ${p.stock}${oos?' — OUT':''}</span>
       </div>`;
     }).join('');
   }
+
+  // Customer dropdown
   const cs=document.getElementById('pos-cust');
   if(cs)cs.innerHTML='<option value="">Walk-in Customer</option>'+db.customers.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
   renderBill();
@@ -1280,65 +1506,197 @@ function renderPOS(){
 
 function setPOSCat(c){posCat=c;renderPOS();}
 
+// Customer selected — show alerts for pending payments and memberships
+function onCustChange(cid){
+  const alertEl=document.getElementById('cust-alerts');
+  if(!alertEl)return;
+  if(!cid){alertEl.innerHTML='';return;}
+  const c=db.customers.find(x=>x.id==cid);
+  if(!c){alertEl.innerHTML='';return;}
+  const cur=db.settings.currency;
+  const earnRate=db.settings.ptsEarn||10;   // points per QAR spent
+  const redeemRate=db.settings.ptsRedeem||100; // points needed per QAR 1 discount
+  let html='';
+
+  // Loyalty points balance
+  if(c.points>0){
+    const maxDiscount=Math.floor(c.points/redeemRate);
+    html+=`<div class="cust-alert" style="background:#fefce8;border:1.5px solid #fde047;color:#713f12;flex-wrap:wrap;gap:6px">
+      <span>⭐ <strong>${c.points} pts</strong> = up to <strong>${cur} ${maxDiscount}</strong> discount</span>
+      <button onclick="redeemPoints(${c.id})" style="padding:4px 12px;border-radius:6px;background:#d97706;color:white;border:none;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0">Use Points</button>
+    </div>`;
+  } else {
+    html+=`<div style="font-size:11px;color:#94a3b8;padding:4px 0">⭐ No points yet — earns ${earnRate} pts per ${cur} 1 spent</div>`;
+  }
+
+  // Pending payment
+  if(c.pendingAmount>0){
+    html+=`<div class="cust-alert cust-alert-pending">⚠️ Pending: <strong>${cur} ${c.pendingAmount}</strong></div>`;
+  }
+
+  // Active membership credit cards
+  const cms=(db.customerMemberships||[]).filter(m=>m.customerId==cid&&m.status==='active');
+  cms.forEach(m=>{
+    html+=`<div class="cust-alert cust-alert-membership">💳 ${m.name}: <strong>${cur} ${m.balance}</strong> credit</div>`;
+  });
+
+  alertEl.innerHTML=html;
+}
+
+// Redeem points — asks how many points to use as discount
+function redeemPoints(cid){
+  const c=db.customers.find(x=>x.id==cid);if(!c||c.points<=0)return;
+  const cur=db.settings.currency;
+  const redeemRate=db.settings.ptsRedeem||100;
+  const maxDiscount=Math.floor(c.points/redeemRate);
+  showModal(`<div class="modal-title">⭐ Redeem Loyalty Points</div>
+    <div style="background:#fefce8;border:1px solid #fde047;border-radius:10px;padding:14px;margin-bottom:16px">
+      <div style="font-size:15px;font-weight:800;color:#713f12">${c.name}</div>
+      <div style="font-size:13px;color:#92400e;margin-top:4px">Available: <strong>${c.points} points</strong></div>
+      <div style="font-size:12px;color:#a16207;margin-top:2px">${redeemRate} points = ${cur} 1 discount</div>
+    </div>
+    <div class="form-row">
+      <label>Points to redeem (max ${c.points})</label>
+      <input type="number" id="redeem-pts" value="${c.points}" min="1" max="${c.points}" oninput="updateRedeemPreview()">
+    </div>
+    <div id="redeem-preview" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px;font-size:13px;font-weight:700;color:#166534;margin-bottom:4px">
+      Discount: ${cur} ${maxDiscount}
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="applyPointsDiscount(${cid})">Apply Discount →</button>
+    </div>`);
+}
+
+function updateRedeemPreview(){
+  const redeemRate=db.settings.ptsRedeem||100;
+  const pts=parseInt(document.getElementById('redeem-pts')?.value)||0;
+  const discount=Math.floor(pts/redeemRate);
+  const cur=db.settings.currency;
+  const el=document.getElementById('redeem-preview');
+  if(el)el.textContent='Discount: '+cur+' '+discount;
+}
+
+function applyPointsDiscount(cid){
+  const c=db.customers.find(x=>x.id==cid);if(!c)return;
+  const ptsInput=parseInt(document.getElementById('redeem-pts')?.value)||0;
+  const pts=Math.min(ptsInput,c.points);
+  const redeemRate=db.settings.ptsRedeem||100;
+  const discount=Math.floor(pts/redeemRate);
+  if(discount<=0){showToast('Not enough points for discount','warn');closeModal();return;}
+  // Apply as fixed discount
+  const dvEl=document.getElementById('disc-val');
+  const dtEl=document.getElementById('disc-type');
+  if(dvEl)dvEl.value=discount;
+  if(dtEl)dtEl.value='fixed';
+  updateBill();
+  // Store pending redemption — will deduct on checkout
+  window._pendingRedemption={cid,pts,discount};
+  closeModal();
+  showToast('⭐ '+pts+' points = '+db.settings.currency+' '+discount+' discount applied!');
+}
+
+// Add service to bill — tap once adds, tap again removes (toggle)
 function addServiceToBill(id){
   const s=db.services.find(x=>x.id===id);if(!s)return;
-  const billId=`svc-${id}`;
+  const billId='svc-'+id;
   const idx=billItems.findIndex(b=>b.billId===billId);
-  if(idx>=0)billItems.splice(idx,1);
-  else billItems.push({billId,type:'service',id:s.id,name:s.name,price:s.price,cost:0,assignedStaff:db.staff[0]?.name||''});
+  if(idx>=0){
+    billItems.splice(idx,1); // toggle off
+  } else {
+    billItems.push({billId,type:'service',id:s.id,name:s.name,price:s.price,cost:0,assignedStaff:[db.staff[0]?.name||'']});
+  }
+  renderPOS();if(billDrawerOpen)syncMobileBill();
+}
+
+// Add package — adds all services inside
+function addPackageToBill(id){
+  const pkg=db.packages.find(x=>x.id===id);if(!pkg)return;
+  const billId=`pkg-${id}`;
+  if(billItems.some(b=>b.billId===billId)){showToast('Package already in bill','warn');return;}
+  billItems.push({billId,type:'package',id:pkg.id,name:pkg.name,price:pkg.price,cost:0,services:pkg.services.map(s=>s.name),assignedStaff:[db.staff[0]?.name||'']});
+  renderPOS();if(billDrawerOpen)syncMobileBill();
+}
+
+// Add membership purchase to bill
+function addMembershipToBill(id){
+  const mem=db.memberships.find(x=>x.id===id);if(!mem)return;
+  const cid=document.getElementById('pos-cust')?.value;
+  if(!cid){showToast('Select a customer to assign membership','warn');return;}
+  const billId=`mem-${id}`;
+  if(billItems.some(b=>b.billId===billId)){showToast('Membership already in bill','warn');return;}
+  billItems.push({billId,type:'membership',id:mem.id,name:mem.name+' Purchase',price:mem.price,cost:0,assignedStaff:[]});
   renderPOS();if(billDrawerOpen)syncMobileBill();
 }
 
 function addProductToBill(id){
   const p=db.inventory.find(x=>x.id===id);if(!p)return;
   const billId=`prd-${id}`;
-  const sellPrice=p.sellPrice||Math.round(p.price*1.4);
+  const sp=p.sellPrice||Math.round(p.price*1.4);
   const idx=billItems.findIndex(b=>b.billId===billId);
-  if(idx>=0){
-    // increase qty
-    billItems[idx].qty=(billItems[idx].qty||1)+1;
-    billItems[idx].price=sellPrice*(billItems[idx].qty);
-  } else {
-    billItems.push({billId,type:'product',id:p.id,name:p.name,price:sellPrice,cost:p.price,qty:1,unitPrice:sellPrice,assignedStaff:db.staff[0]?.name||''});
-  }
+  if(idx>=0){billItems[idx].qty=(billItems[idx].qty||1)+1;billItems[idx].price=sp*(billItems[idx].qty);}
+  else billItems.push({billId,type:'product',id:p.id,name:p.name,price:sp,cost:p.price,qty:1,unitPrice:sp,assignedStaff:[]});
   renderPOS();if(billDrawerOpen)syncMobileBill();
 }
 
-// Legacy toggle for backward compat
 function toggleBill(id){addServiceToBill(id);}
+
+// Toggle staff assignment (multi-staff support)
+function toggleStaffForItem(itemIdx,staffName){
+  const it=billItems[itemIdx];if(!it)return;
+  if(!Array.isArray(it.assignedStaff))it.assignedStaff=[it.assignedStaff||''];
+  const idx=it.assignedStaff.indexOf(staffName);
+  if(idx>=0)it.assignedStaff.splice(idx,1);
+  else it.assignedStaff.push(staffName);
+  renderBill();
+}
 
 function renderBill(){
   const cur=db.settings.currency;
   const bi=document.getElementById('bill-items');
   if(!bi)return;
   if(billItems.length===0){
-    bi.innerHTML='<div style="text-align:center;padding:24px;color:#94a3b8;font-size:13px">Tap a service or product to add</div>';
-  } else {
-    bi.innerHTML=billItems.map((it,i)=>`<div class="bill-item">
+    bi.innerHTML='<div style="text-align:center;padding:24px;color:#94a3b8;font-size:14px">Tap a service or product to add</div>';
+    updateBill();return;
+  }
+  bi.innerHTML=billItems.map((it,i)=>{
+    const staffArr=Array.isArray(it.assignedStaff)?it.assignedStaff:[it.assignedStaff||''];
+    const typeIcon={service:'✂️',package:'🎁',membership:'💳',product:'📦'}[it.type]||'';
+    const staffBlock=(it.type==='service'||it.type==='package')?`
+      <div style="margin-top:6px">
+        <div style="font-size:10px;color:#94a3b8;margin-bottom:4px;font-weight:600">STAFF (tap to assign multiple):</div>
+        <div class="staff-sel-row">${db.staff.map(st=>`<button class="staff-sel-btn ${staffArr.includes(st.name)?'sel':''}" onclick="toggleStaffForItem(${i},'${st.name}')" style="${staffArr.includes(st.name)?'background:'+st.color+';border-color:'+st.color:''}">${st.name.split(' ')[0]}</button>`).join('')}</div>
+      </div>`:
+      (it.type==='product'?`<div style="display:flex;align-items:center;gap:6px;margin-top:6px">
+        <button onclick="changeQty(${i},-1)" style="width:26px;height:26px;border-radius:50%;border:1.5px solid #e2e8f0;background:white;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;font-weight:700">−</button>
+        <span style="font-size:13px;font-weight:700;min-width:20px;text-align:center">${it.qty||1}</span>
+        <button onclick="changeQty(${i},1)" style="width:26px;height:26px;border-radius:50%;border:1.5px solid #e2e8f0;background:white;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;font-weight:700">+</button>
+      </div>`:'');
+    return`<div class="bill-item">
       <div style="flex:1">
-        <div class="bill-item-name">${it.type==='product'?'📦 ':''}<b>${it.name}</b>${it.qty>1?` ×${it.qty}`:''}</div>
-        ${it.type==='service'?`<select style="font-size:10px;padding:2px 4px;border-radius:4px;border:1px solid #e2e8f0;background:#f8fafc;color:#475569;max-width:130px;margin-top:2px" onchange="assignStaff(${i},this.value)">${db.staff.map(st=>`<option ${st.name===it.assignedStaff?'selected':''}>${st.name}</option>`).join('')}</select>`:'<span style="font-size:10px;color:#94a3b8">Retail product</span>'}
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">${typeIcon}</span><span class="bill-item-name">${it.name}${it.qty>1?` ×${it.qty}`:''}</span></div>
+        ${it.type==='package'?`<div style="font-size:11px;color:#7c3aed;margin-top:2px">${(it.services||[]).join(' + ')}</div>`:''}
+        ${staffBlock}
       </div>
-      <div style="display:flex;align-items:center;gap:6px">
-        ${it.type==='product'?`<div style="display:flex;align-items:center;gap:4px"><button onclick="changeQty(${i},-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center">−</button><button onclick="changeQty(${i},1)" style="width:22px;height:22px;border-radius:50%;border:1px solid #e2e8f0;background:white;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center">+</button></div>`:''}
+      <div style="display:flex;align-items:flex-start;gap:6px;flex-shrink:0;margin-left:8px">
         <div class="bill-item-price">${cur} ${it.price}</div>
         <div class="bill-del" onclick="removeItem(${i})">✕</div>
       </div>
-    </div>`).join('');
-  }
+    </div>`;
+  }).join('');
   updateBill();
 }
 
 function changeQty(i,delta){
   if(!billItems[i])return;
-  const newQty=(billItems[i].qty||1)+delta;
-  if(newQty<=0){billItems.splice(i,1);}
-  else{billItems[i].qty=newQty;billItems[i].price=billItems[i].unitPrice*newQty;}
+  const nq=(billItems[i].qty||1)+delta;
+  if(nq<=0)billItems.splice(i,1);
+  else{billItems[i].qty=nq;billItems[i].price=billItems[i].unitPrice*nq;}
   renderPOS();if(billDrawerOpen)syncMobileBill();
 }
 
-function assignStaff(i,n){if(billItems[i])billItems[i].assignedStaff=n;}
 function removeItem(i){billItems.splice(i,1);renderPOS();if(billDrawerOpen)syncMobileBill();}
+function assignStaff(i,n){if(billItems[i])billItems[i].assignedStaff=[n];}
 
 function updateBill(){
   const sub=billItems.reduce((a,it)=>a+it.price,0);
@@ -1347,20 +1705,36 @@ function updateBill(){
   const disc=dt==='pct'?Math.round(sub*dv/100):Math.min(dv,sub);
   const total=Math.max(0,sub-disc);
   const cur=db.settings.currency;
-  const bs=document.getElementById('b-sub');const bd=document.getElementById('b-disc');const bt=document.getElementById('b-total');
+  const bs=document.getElementById('b-sub');
+  const bd=document.getElementById('b-disc');
+  const bt=document.getElementById('b-total');
   if(bs)bs.textContent=cur+' '+sub;
   if(bd)bd.textContent='-'+cur+' '+disc;
   if(bt)bt.textContent=cur+' '+total;
 }
 
-function selPay(m,el){selPayment=m;document.querySelectorAll('.pay-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');}
+function selPay(m,el){
+  selPayment=m;
+  document.querySelectorAll('.pay-btn').forEach(b=>b.classList.remove('sel'));
+  if(el)el.classList.add('sel');
+  const cid=document.getElementById('pos-cust')?.value;
+  if((m==='membership'||m==='credit')&&!cid){
+    showToast('Select a customer to use '+m,'warn');
+  }
+}
 
 function checkout(){
   if(!billItems.length){showToast('Add items first','warn');return;}
-  const custEl=document.getElementById('pos-cust-mob')?.offsetParent!==null?document.getElementById('pos-cust-mob'):document.getElementById('pos-cust');
+  const custEl=document.getElementById('pos-cust-mob')?.offsetParent!==null
+    ?document.getElementById('pos-cust-mob')
+    :document.getElementById('pos-cust');
   const sub=billItems.reduce((a,it)=>a+it.price,0);
-  const dvEl=document.getElementById('disc-val-mob')?.offsetParent!==null?document.getElementById('disc-val-mob'):document.getElementById('disc-val');
-  const dtEl=document.getElementById('disc-type-mob')?.offsetParent!==null?document.getElementById('disc-type-mob'):document.getElementById('disc-type');
+  const dvEl=document.getElementById('disc-val-mob')?.offsetParent!==null
+    ?document.getElementById('disc-val-mob')
+    :document.getElementById('disc-val');
+  const dtEl=document.getElementById('disc-type-mob')?.offsetParent!==null
+    ?document.getElementById('disc-type-mob')
+    :document.getElementById('disc-type');
   const dv=parseFloat(dvEl?.value)||0;
   const dt=dtEl?.value||'pct';
   const disc=dt==='pct'?Math.round(sub*dv/100):Math.min(dv,sub);
@@ -1368,35 +1742,73 @@ function checkout(){
   const cid=custEl?.value||'';
   const cnm=cid?db.customers.find(c=>c.id==cid)?.name||'Walk-in':'Walk-in';
 
-  // Deduct product stock + build sale items
+  if(selPayment==='credit'&&!cid){showToast('Select customer for credit payment','warn');return;}
+  if(selPayment==='membership'&&!cid){showToast('Select customer for membership payment','warn');return;}
+
   const saleItems=billItems.map(it=>{
     if(it.type==='product'){
       const inv=db.inventory.find(x=>x.id===it.id);
-      if(inv){
-        inv.stock=Math.max(0,inv.stock-(it.qty||1));
-        // also deduct from open liquid if applicable
-        if(inv.isLiquid&&inv.currentMl){
-          const mlPerUse=inv.dailyUsageMl||10;
-          inv.currentMl=Math.max(0,inv.currentMl-mlPerUse*(it.qty||1));
-        }
-      }
-      return{type:'product',service:it.name,price:it.price,cost:it.cost,qty:it.qty||1,staff:it.assignedStaff,productId:it.id};
+      if(inv){inv.stock=Math.max(0,inv.stock-(it.qty||1));}
+      return{type:'product',service:it.name,price:it.price,cost:it.cost,qty:it.qty||1,staff:(Array.isArray(it.assignedStaff)?it.assignedStaff.join(','):it.assignedStaff)||'',productId:it.id};
     }
-    return{type:'service',service:it.name,price:it.price,cost:it.cost||0,staff:it.assignedStaff};
+    if(it.type==='package'){
+      return{type:'package',service:it.name,price:it.price,cost:0,staff:(Array.isArray(it.assignedStaff)?it.assignedStaff.join(','):it.assignedStaff)||''};
+    }
+    if(it.type==='membership'){
+      const mem=db.memberships?db.memberships.find(x=>x.id===it.id):null;
+      if(mem&&cid){
+        if(!db.customerMemberships)db.customerMemberships=[];
+        db.customerMemberships.push({id:Date.now(),customerId:parseInt(cid),membershipId:mem.id,name:mem.name,totalCredit:it.price+(mem.bonus||0),usedCredit:0,balance:it.price+(mem.bonus||0),purchaseDate:TODAY,status:'active'});
+      }
+      return{type:'membership',service:it.name,price:it.price,cost:0,staff:''};
+    }
+    return{type:'service',service:it.name,price:it.price,cost:it.cost||0,staff:(Array.isArray(it.assignedStaff)?it.assignedStaff.join(','):it.assignedStaff)||''};
   });
 
-  db.sales.unshift({id:Date.now(),date:TODAY,customer:cnm,items:saleItems,total,payment:selPayment,discount:disc});
-  if(cid){const c=db.customers.find(x=>x.id==cid);if(c){c.points+=Math.floor(total/(db.settings.pts||10));c.visits.unshift({date:TODAY,service:billItems.map(i=>i.name).join(', '),amount:total,staff:billItems[0].assignedStaff});}}
+  if(selPayment==='membership'&&cid){
+    const cms=(db.customerMemberships||[]).filter(m=>m.customerId==cid&&m.status==='active');
+    let rem=total;
+    cms.forEach(m=>{if(rem>0){const use=Math.min(m.balance,rem);m.balance-=use;m.usedCredit+=use;rem-=use;}});
+  }
+  if(selPayment==='credit'&&cid){
+    const c=db.customers.find(x=>x.id==cid);
+    if(c)c.pendingAmount=(c.pendingAmount||0)+total;
+  }
+
+  db.sales.unshift({id:Date.now(),date:TODAY,customer:cnm,customerId:cid||null,items:saleItems,total,payment:selPayment,discount:disc});
+  if(cid){
+    const c=db.customers.find(x=>x.id==cid);
+    if(c){
+      // Earn loyalty points — earnRate pts per QAR 1 spent
+      const earnRate=db.settings.ptsEarn||10;
+      const earned=Math.floor(total*earnRate);
+      c.points=(c.points||0)+earned;
+      // Deduct redeemed points if applied
+      if(window._pendingRedemption&&window._pendingRedemption.cid==cid){
+        c.points=Math.max(0,c.points-window._pendingRedemption.pts);
+        window._pendingRedemption=null;
+      }
+      const staffName=billItems.filter(i=>i.type!=='membership').map(i=>Array.isArray(i.assignedStaff)?i.assignedStaff[0]||'':i.assignedStaff||'').filter(Boolean)[0]||'';
+      c.visits.unshift({date:TODAY,service:billItems.map(i=>i.name).join(', '),amount:total,staff:staffName,ptsEarned:earned});
+    }
+  }
 
   saveDB();billItems=[];
   if(dvEl)dvEl.value='';
-  closeBillDrawer();
-  renderPOS();
-  showToast('Sale complete! '+db.settings.currency+' '+total+' via '+selPayment);
+  closeBillDrawer();renderPOS();
+  const earnRate2=db.settings.ptsEarn||10;
+  const earnedMsg=cid?(' +'+Math.floor(total*earnRate2)+' pts'):'';
+  showToast('Sale complete! '+db.settings.currency+' '+total+' via '+selPayment+earnedMsg);
 }
 
-// ─── CALENDAR — STAFF-COLUMN DAY VIEW ──────────────────────────
-const APPT_COLORS={booked:{bg:'#dbeafe',tc:'#1d4ed8'},inprogress:{bg:'#fef9c3',tc:'#92400e'},done:{bg:'#dcfce7',tc:'#166534'},cancelled:{bg:'#fee2e2',tc:'#991b1b'}};
+
+// ALL statuses shown including cancelled (shown in red)
+const APPT_COLORS={
+  booked:     {bg:'#dbeafe',tc:'#1d4ed8'},
+  inprogress: {bg:'#fef9c3',tc:'#92400e'},
+  done:       {bg:'#dcfce7',tc:'#166534'},
+  cancelled:  {bg:'#fee2e2',tc:'#991b1b',border:'#fca5a5'}
+};
 
 // Per-staff pastel palettes matching the reference image
 const STAFF_PALETTES=[
@@ -1435,13 +1847,13 @@ function renderCalendar(){
 
 function renderDayView(){
   const dateStr=dcFmt(dcDate);
-  const isToday=dateStr===TODAY;
   document.getElementById('dc-date-lbl').textContent=dcDate.toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
   const staff=db.staff||[];
-  const appts=(db.appointments||[]).filter(a=>a.date===dateStr&&a.status!=='cancelled');
+  // Show ALL appointments including cancelled
+  const appts=(db.appointments||[]).filter(a=>a.date===dateStr);
 
-  // ── Staff header ─────────────────────────────────────────────
+  // Staff header
   document.getElementById('dc-staff-hdr-scroll').innerHTML=staff.map((s,si)=>{
     const ini=s.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
     return`<div class="day-cal-staff-hdr">
@@ -1450,7 +1862,7 @@ function renderDayView(){
     </div>`;
   }).join('');
 
-  // ── Time gutter ───────────────────────────────────────────────
+  // Time gutter
   let tHtml='';
   for(let h=DC_START;h<=DC_END;h++){
     const lbl=h===DC_START?'':(h<12?h+':00 am':h===12?'12:00 pm':(h-12)+':00 pm');
@@ -1458,43 +1870,66 @@ function renderDayView(){
   }
   document.getElementById('dc-time-col').innerHTML=tHtml;
 
-  // ── Grid: one lane per staff ───────────────────────────────────
+  // Grid: one lane per staff
   const totalH=(DC_END-DC_START+1)*DC_HOUR_H;
   const grid=document.getElementById('dc-grid');
   grid.style.height=totalH+'px';
+
   grid.innerHTML=staff.map((s,si)=>{
     const staffAppts=appts.filter(a=>a.staff===s.name);
     const palette=STAFF_PALETTES[si%STAFF_PALETTES.length];
-    // Hour rows (clickable to add)
+
+    // Hour rows
     let rows='';
     for(let h=DC_START;h<=DC_END;h++){
       rows+=`<div class="day-cal-hour" style="height:${DC_HOUR_H}px" onclick="cellClickDC('${dateStr}','${String(h).padStart(2,'0')}:00','${s.name}')"><div class="day-cal-half"></div></div>`;
     }
-    // Appointment blocks
-    const blocks=staffAppts.map(a=>{
+
+    // Handle overlapping appointments — group by time collision
+    // Assign column index within overlapping groups
+    const positioned=staffAppts.map(a=>{
       const [hh,mm]=(a.timeStr||a.time||'09:00').split(':').map(Number);
+      const startMin=hh*60+mm;
+      const endMin=startMin+(a.duration||60);
+      return{...a,startMin,endMin};
+    });
+    // For each appointment, find how many overlap with it and what column it's in
+    positioned.forEach((a,i)=>{
+      const overlaps=positioned.filter((b,j)=>j<i&&b.endMin>a.startMin&&b.startMin<a.endMin);
+      a.col=overlaps.length;
+      a.maxCols=positioned.filter(b=>b.endMin>a.startMin&&b.startMin<a.endMin).length;
+    });
+
+    const blocks=positioned.map(a=>{
+      const hh=Math.floor(a.startMin/60),mm=a.startMin%60;
       const dur=a.duration||60;
       const top=(hh-DC_START)*DC_HOUR_H+(mm/60)*DC_HOUR_H;
-      const ht=Math.max(28,(dur/60)*DC_HOUR_H-4);
+      const ht=Math.max(30,(dur/60)*DC_HOUR_H-4);
       const col=APPT_COLORS[a.status]||palette;
-      const bgC=col.bg||palette.bg;
-      const tcC=col.tc||palette.tc;
+      const bgC=a.status==='cancelled'?'#fee2e2':(col.bg||palette.bg);
+      const tcC=a.status==='cancelled'?'#991b1b':(col.tc||palette.tc);
+      const borderC=a.status==='cancelled'?'2px solid #f87171':'none';
       const endH=hh+Math.floor((mm+dur)/60),endM=(mm+dur)%60;
       const tLbl=`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')} - ${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')}`;
-      return`<div class="dc-appt" style="top:${top}px;height:${ht}px;background:${bgC};color:${tcC}" onclick="event.stopPropagation();apptClick(${a.id})">
+      const cancelledStrike=a.status==='cancelled'?'text-decoration:line-through;opacity:.7;':'' ;
+      // Overlap layout: divide lane into columns
+      const maxC=Math.max(a.maxCols||1,1);
+      const colW=100/maxC;
+      const leftPct=(a.col||0)*colW;
+      const cancelledLabel=a.status==='cancelled'?'<span style="font-size:9px;background:#f87171;color:white;border-radius:4px;padding:1px 4px;margin-left:4px">Cancelled</span>':'';
+      return`<div class="dc-appt" style="top:${top}px;height:${ht}px;background:${bgC};color:${tcC};border:${borderC};left:calc(${leftPct}% + 3px);width:calc(${colW}% - 6px);position:absolute;" onclick="event.stopPropagation();apptClickToPOS(${a.id})">
         <span class="dc-appt-time">${tLbl}</span>
-        <span class="dc-appt-name">${a.customer}</span>
+        <span class="dc-appt-name" style="${cancelledStrike}">${a.customer}${cancelledLabel}</span>
         ${ht>46?`<span class="dc-appt-svc">${a.service}</span>`:''}
       </div>`;
     }).join('');
+
     return`<div class="day-cal-lane" style="min-width:140px;flex:1;height:${totalH}px;position:relative">${rows}${blocks}</div>`;
   }).join('');
 
-  // Sync header scroll with grid scroll
   const scroll=document.getElementById('dc-scroll');
   const hdrScroll=document.getElementById('dc-staff-hdr-scroll');
   scroll.onscroll=()=>{hdrScroll.scrollLeft=scroll.scrollLeft;};
-  // Scroll to 8am on first render
   setTimeout(()=>{scroll.scrollTop=(8-DC_START)*DC_HOUR_H;},40);
 }
 
@@ -1530,7 +1965,7 @@ function renderWeekView(){
     TIMES.forEach((t,ti)=>{
       rows+=`<div class="day-cal-hour" style="height:${DC_HOUR_H}px" onclick="cellClickDC('${ds}','${t.replace(':',':')}','')"><div class="day-cal-half"></div></div>`;
     });
-    const dayAppts=(db.appointments||[]).filter(a=>a.date===ds&&a.status!=='cancelled');
+    const dayAppts=(db.appointments||[]).filter(a=>a.date===ds); // include cancelled
     dayAppts.forEach(a=>{
       const slotH=parseInt((a.timeStr||'09:00').split(':')[0])||9;
       const slotTi=TIMES.findIndex(t=>parseInt(t)===slotH);
@@ -1540,8 +1975,9 @@ function renderWeekView(){
       const dur=a.duration||60;
       const ht=Math.max(28,(dur/60)*DC_HOUR_H-4);
       const col=APPT_COLORS[a.status]||{bg:'#dbeafe',tc:'#1d4ed8'};
-      blocks+=`<div class="dc-appt" style="top:${top}px;height:${ht}px;background:${col.bg};color:${col.tc}" onclick="event.stopPropagation();apptClick(${a.id})">
-        <span class="dc-appt-name" style="font-size:10px">${a.customer.split(' ')[0]}</span>
+      const cancelBorder=a.status==='cancelled'?'border:2px solid #f87171;':'';
+      blocks+=`<div class="dc-appt" style="top:${top}px;height:${ht}px;background:${col.bg};color:${col.tc};${cancelBorder}" onclick="event.stopPropagation();apptClickToPOS(${a.id})">
+        <span class="dc-appt-name" style="font-size:10px;${a.status==='cancelled'?'text-decoration:line-through':''}">${a.customer.split(' ')[0]}</span>
         ${ht>38?`<span class="dc-appt-svc">${a.service}</span>`:''}
       </div>`;
     });
@@ -1556,6 +1992,38 @@ function renderWeekView(){
 
 function cellClickDC(date,time,staffName){showNewAppt(date,null,time,staffName);}
 
+// Appointment click → load into POS directly
+function apptClickToPOS(id){
+  const a=db.appointments.find(x=>x.id===id);if(!a)return;
+  if(a.status==='cancelled'){
+    // For cancelled: show detail modal only
+    apptClick(id);return;
+  }
+  // Load the service and customer into POS bill
+  const svc=db.services.find(s=>s.name===a.service);
+  const cust=db.customers.find(c=>c.name===a.customer);
+  // Switch to POS page
+  navTo('pos');
+  // Clear existing bill
+  billItems=[];
+  // Add the appointment service
+  if(svc){
+    billItems.push({billId:'svc-'+svc.id+'-'+Date.now(),type:'service',id:svc.id,name:svc.name,price:svc.price,cost:0,assignedStaff:[a.staff||db.staff[0]?.name||'']});
+  } else {
+    // Service no longer in menu — add as custom
+    billItems.push({billId:'appt-'+id,type:'service',id:0,name:a.service,price:0,cost:0,assignedStaff:[a.staff||'']});
+  }
+  // Select the customer in POS dropdown
+  setTimeout(()=>{
+    const sel=document.getElementById('pos-cust');
+    if(sel&&cust){sel.value=cust.id;onCustChange(cust.id);}
+    renderBill();
+    // Mark appointment as in progress
+    a.status='inprogress';saveDB();
+    showToast('Appointment loaded into POS — '+a.customer,'');
+  },100);
+}
+
 function apptClick(id){
   const a=db.appointments.find(x=>x.id===id);if(!a)return;
   const [hh,mm]=(a.timeStr||a.time||'09:00').split(':').map(Number);
@@ -1563,17 +2031,19 @@ function apptClick(id){
   const endH=hh+Math.floor((mm+dur)/60),endM=(mm+dur)%60;
   showModal(`<div class="modal-title">Appointment</div>
     <div style="background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:14px">
-      <div style="font-size:15px;font-weight:800;color:#0f172a;margin-bottom:4px">${a.customer}</div>
+      <div style="font-size:16px;font-weight:800;color:#0f172a;margin-bottom:4px">${a.customer}</div>
       <div style="font-size:13px;color:#64748b">${a.service} · ${a.staff}</div>
       <div style="font-size:12px;color:#94a3b8;margin-top:2px">${a.date} · ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')} – ${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')} (${dur} min)</div>
+      ${a.status==='cancelled'?'<div style="margin-top:8px;background:#fee2e2;border-radius:6px;padding:6px 10px;font-size:12px;color:#991b1b;font-weight:700">❌ This appointment was cancelled</div>':''}
     </div>
     <div class="form-row"><label>Status</label>
       <select id="ma-status">${['booked','inprogress','done','cancelled'].map(s=>`<option value="${s}" ${a.status===s?'selected':''}>${s}</option>`).join('')}</select>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-danger btn-sm" onclick="deleteAppt(${id})">Cancel Appt</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteAppt(${id})">Delete</button>
       <button class="btn" onclick="closeModal()">Close</button>
-      <button class="btn btn-primary" onclick="saveApptStatus(${id})">Update</button>
+      ${a.status!=='cancelled'?`<button class="btn btn-primary" onclick="closeModal();apptClickToPOS(${id})">Open in POS →</button>`:''}
+      <button class="btn btn-primary" onclick="saveApptStatus(${id})">Update Status</button>
     </div>`);
 }
 function saveApptStatus(id){
@@ -1633,34 +2103,64 @@ function renderCustomers(){
   if(db.customers[0]&&window.innerWidth>640)showCustDetail(db.customers[0].id);
 }
 function renderCustList(list){
-  document.getElementById('cust-items').innerHTML=list.map(c=>`<div class="cust-item ${selCustId===c.id?'sel':''}" onclick="showCustDetail(${c.id})"><div class="avatar" style="width:34px;height:34px;font-size:12px">${c.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div><div style="flex:1"><div class="cust-nm">${c.name}</div><div class="cust-ph">${c.phone}</div></div><div class="pts-badge">⭐ ${c.points}pts</div></div>`).join('');
+  document.getElementById('cust-items').innerHTML=list.map(c=>{
+    const pts=c.points||0;
+    const redeemRate=db.settings.ptsRedeem||100;
+    const discVal=Math.floor(pts/redeemRate);
+    return`<div class="cust-item ${selCustId===c.id?'sel':''}" onclick="showCustDetail(${c.id})">
+      <div class="avatar" style="width:34px;height:34px;font-size:12px">${c.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+      <div style="flex:1">
+        <div class="cust-nm">${c.name}</div>
+        <div class="cust-ph">${c.phone}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="pts-badge">⭐ ${pts} pts</div>
+        ${discVal>0?`<div style="font-size:10px;color:#16a34a;margin-top:2px;font-weight:700">${db.settings.currency} ${discVal} off</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
 }
 function filterCusts(q){renderCustList(db.customers.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())||c.phone.includes(q)));}
 function showCustDetail(id){
   selCustId=id;const c=db.customers.find(x=>x.id===id);if(!c)return;
   const totalSpent=c.visits.reduce((a,v)=>a+v.amount,0);
   const isMobile=window.innerWidth<=640;
-  // On mobile: hide list, show detail panel
   if(isMobile){
     document.getElementById('cust-grid').style.display='block';
     document.querySelector('.cust-list-wrap').style.display='none';
     document.getElementById('cust-detail').style.display='block';
   }
+  const cur=db.settings.currency;
+  // Membership cards for this customer
+  const cms=(db.customerMemberships||[]).filter(m=>m.customerId===c.id&&m.status==='active');
+  const memHtml=cms.length>0?`<div style="margin-bottom:10px">
+    <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px">💳 Membership Cards</div>
+    ${cms.map(m=>`<div style="background:linear-gradient(135deg,#fff,#fffbeb);border:1.5px solid #fde68a;border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:1.4rem">${db.memberships?.find(x=>x.id===m.membershipId)?.icon||'💳'}</span>
+      <div style="flex:1"><div style="font-size:13px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#94a3b8">Purchased: ${m.purchaseDate}</div></div>
+      <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#d97706">${cur} ${m.balance}</div><div style="font-size:10px;color:#94a3b8">remaining of ${cur} ${m.totalCredit}</div></div>
+    </div>`).join('')}
+  </div>`:'' ;
+  // Pending payment alert
+  const pendingHtml=(c.pendingAmount&&c.pendingAmount>0)?`<div style="background:#fef3c7;border:1.5px solid #fde68a;border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:12px;font-weight:700;color:#92400e">⚠️ Pending Payment: ${cur} ${c.pendingAmount} <button onclick="clearPending(${c.id})" style="margin-left:8px;padding:3px 10px;border-radius:6px;border:1px solid #f59e0b;background:white;color:#92400e;cursor:pointer;font-size:11px;font-weight:700">Mark Paid</button></div>`:'';
   document.getElementById('cust-detail').innerHTML=`
     ${isMobile?`<button onclick="showCustList()" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#e11d48;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:12px;padding:0">‹ Back to Customers</button>`:''}
+    ${pendingHtml}
+    ${memHtml}
     <div class="card" style="margin-bottom:10px">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
         <div class="avatar" style="width:50px;height:50px;font-size:16px">${c.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
         <div style="flex:1">
           <div style="font-size:16px;font-weight:800;color:#0f172a">${c.name}</div>
-          <div style="font-size:12px;color:#64748b">${c.phone} · ${c.email}</div>
+          <div style="font-size:12px;color:#64748b">${c.phone}${c.email?' · '+c.email:''}</div>
         </div>
         <div class="pts-badge" style="font-size:13px;padding:4px 12px">⭐ ${c.points} pts</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px">
         <div class="kpi-card" style="padding:10px"><div class="kpi-label">Visits</div><div style="font-size:18px;font-weight:800;color:#0f172a">${c.visits.length}</div></div>
-        <div class="kpi-card" style="padding:10px"><div class="kpi-label">Total Spent</div><div style="font-size:16px;font-weight:800;color:#0f172a">${db.settings.currency} ${totalSpent}</div></div>
+        <div class="kpi-card" style="padding:10px"><div class="kpi-label">Total Spent</div><div style="font-size:15px;font-weight:800;color:#0f172a">${cur} ${totalSpent}</div></div>
         <div class="kpi-card" style="padding:10px"><div class="kpi-label">Points</div><div style="font-size:18px;font-weight:800;color:#d97706">${c.points}</div></div>
+        <div class="kpi-card" style="padding:10px"><div class="kpi-label">Pending</div><div style="font-size:15px;font-weight:800;color:${(c.pendingAmount||0)>0?'#e11d48':'#16a34a'}">${cur} ${c.pendingAmount||0}</div></div>
       </div>
       ${c.note?`<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;color:#92400e">📝 ${c.note}</div>`:''}
     </div>
@@ -1669,10 +2169,14 @@ function showCustDetail(id){
         <div class="card-title" style="margin:0">Visit History</div>
         <button class="btn btn-primary btn-sm" onclick="showEditCustomer(${c.id})">Edit</button>
       </div>
-      ${c.visits.map(v=>`<div class="visit-row"><div style="flex:1"><div style="font-weight:700;color:#0f172a;font-size:12px">${v.service}</div><div style="color:#64748b;font-size:11px">${v.staff} · ${v.date}</div></div><div style="font-weight:800;color:#0d9488">${db.settings.currency} ${v.amount}</div></div>`).join('')}
+      ${c.visits.map(v=>`<div class="visit-row"><div style="flex:1"><div style="font-weight:700;color:#0f172a;font-size:12px">${v.service}</div><div style="color:#64748b;font-size:11px">${v.staff} · ${v.date}</div></div><div style="text-align:right"><div style="font-weight:800;color:#0d9488">${cur} ${v.amount}</div>${v.ptsEarned?`<div style="font-size:10px;color:#d97706">+${v.ptsEarned} pts</div>`:''}</div></div>`).join('')}
       ${c.visits.length===0?'<div style="color:#94a3b8;font-size:12px;text-align:center;padding:16px">No visits yet</div>':''}
     </div>`;
   renderCustList(db.customers);
+}
+function clearPending(cid){
+  const c=db.customers.find(x=>x.id===cid);
+  if(c){c.pendingAmount=0;saveDB();showCustDetail(cid);showToast('Pending payment cleared');}
 }
 function showCustList(){
   document.getElementById('cust-grid').style.display='';
@@ -1695,17 +2199,75 @@ function updateCustomer(id){
   saveDB();closeModal();showCustDetail(id);showToast('Customer updated');
 }
 function showAddCustomer(){
-  showModal(`<div class="modal-title">Add Customer</div>
-    <div class="form-row"><label>Full Name</label><input type="text" id="nc-name" placeholder="e.g. Sara Ahmed"></div>
-    <div class="form-row"><label>Phone</label><input type="text" id="nc-phone" placeholder="+974..."></div>
-    <div class="form-row"><label>Email</label><input type="email" id="nc-email" placeholder="email@example.com"></div>
-    <div class="form-row"><label>Notes</label><input type="text" id="nc-note" placeholder="Preferences..."></div>
-    <div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveCustomer()">Add →</button></div>`);
+  showModal(`<div class="modal-title">Add / Find Customer</div>
+    <div style="background:#fefce8;border:1px solid #fde047;border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:#713f12">
+      📱 Enter phone number to find existing customer or register new one. Loyalty points are linked to phone number.
+    </div>
+    <div class="form-row">
+      <label>Phone Number *</label>
+      <div style="display:flex;gap:8px">
+        <input type="tel" id="nc-phone" placeholder="+974 5512 3456" style="flex:1" oninput="checkPhoneLookup(this.value)">
+        <button onclick="lookupPhone()" style="padding:10px 14px;border-radius:8px;background:#0f172a;color:white;border:none;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">🔍 Find</button>
+      </div>
+      <div id="phone-lookup-result" style="margin-top:6px;font-size:12px"></div>
+    </div>
+    <div id="new-cust-fields">
+      <div class="form-row"><label>Full Name *</label><input type="text" id="nc-name" placeholder="e.g. Sara Ahmed"></div>
+      <div class="form-row"><label>Email (optional)</label><input type="email" id="nc-email" placeholder="email@example.com"></div>
+      <div class="form-row"><label>Notes / Preferences</label><input type="text" id="nc-note" placeholder="e.g. Prefers Aisha, sensitive skin…"></div>
+    </div>
+    <div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveCustomer()">Save Customer →</button></div>`);
 }
+
+function checkPhoneLookup(val){
+  const result=document.getElementById('phone-lookup-result');
+  if(!result)return;
+  const existing=db.customers.find(c=>c.phone===val.trim()||(c.phone&&c.phone.replace(/\s/g,'')===val.trim().replace(/\s/g,'')));
+  if(existing){
+    result.innerHTML=`<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:7px 10px;color:#166534;font-weight:700">✓ Found: ${existing.name} — ⭐ ${existing.points} points</div>`;
+  } else if(val.length>=7){
+    result.innerHTML=`<div style="color:#94a3b8">New customer — fill in details below</div>`;
+  } else {
+    result.innerHTML='';
+  }
+}
+
+function lookupPhone(){
+  const phone=document.getElementById('nc-phone')?.value.trim();
+  if(!phone){showToast('Enter phone number','warn');return;}
+  const existing=db.customers.find(c=>c.phone===phone||(c.phone&&c.phone.replace(/\s/g,'')===phone.replace(/\s/g,'')));
+  if(existing){
+    closeModal();
+    showCustDetail(existing.id);
+    showToast('Customer found: '+existing.name+' ⭐ '+existing.points+' pts');
+  } else {
+    showToast('Not found — fill in details to register new customer','');
+  }
+}
+
 function saveCustomer(){
-  const nm=document.getElementById('nc-name').value.trim();if(!nm){showToast('Name required','warn');return;}
-  db.customers.unshift({id:Date.now(),name:nm,phone:document.getElementById('nc-phone').value||'',email:document.getElementById('nc-email').value||'',points:0,visits:[],note:document.getElementById('nc-note').value||''});
-  saveDB();closeModal();renderCustomers();showToast('Customer added!');
+  const phone=document.getElementById('nc-phone')?.value.trim()||'';
+  // Check if phone already registered
+  if(phone){
+    const existing=db.customers.find(c=>c.phone===phone||(c.phone&&c.phone.replace(/\s/g,'')===phone.replace(/\s/g,'')));
+    if(existing){
+      closeModal();
+      showCustDetail(existing.id);
+      showToast('Customer already registered: '+existing.name,'');
+      return;
+    }
+  }
+  const nm=document.getElementById('nc-name')?.value.trim();
+  if(!nm){showToast('Name required','warn');return;}
+  const earnRate=db.settings.ptsEarn||10;
+  db.customers.unshift({
+    id:Date.now(),name:nm,phone:phone,
+    email:document.getElementById('nc-email')?.value||'',
+    points:0,creditBalance:0,pendingAmount:0,
+    visits:[],note:document.getElementById('nc-note')?.value||''
+  });
+  saveDB();closeModal();renderCustomers();
+  showToast('Customer registered! Earns '+earnRate+' pts per '+db.settings.currency+' 1 spent');
 }
 
 // ─── STAFF ──────────────────────────────────────────────────────
@@ -1902,6 +2464,15 @@ function doQuickReceive(id){
 function showAddProduct(){
   showModal(`<div class="modal-title">Add Product</div>
     <div class="form-row"><label>Product Name</label><input type="text" id="np-name" placeholder="e.g. Loreal Serum"></div>
+    <div class="form-row"><label>Product Image (optional)</label>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div id="np-img-preview" style="width:60px;height:60px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0">📦</div>
+        <div style="flex:1">
+          <input type="file" id="np-img" accept="image/*" style="font-size:12px;width:100%" onchange="previewProductImage(this)">
+          <div style="font-size:11px;color:#94a3b8;margin-top:4px">JPG, PNG — shown on POS product card</div>
+        </div>
+      </div>
+    </div>
     <div class="form-row"><label>Category</label><select id="np-cat"><option>Treatment</option><option>Color</option><option>Nails</option><option>Haircare</option><option>Skincare</option><option>Waxing</option><option>Tools</option><option>Other</option></select></div>
     <div class="form-row"><label>Units in Stock</label><input type="number" id="np-stock" value="1" min="0"></div>
     <div class="form-row"><label>Min Stock Alert</label><input type="number" id="np-min" value="3" min="0"></div>
@@ -1909,7 +2480,7 @@ function showAddProduct(){
       <div class="form-row"><label>Cost Price (${db.settings.currency})</label><input type="number" id="np-price" value="0" min="0" placeholder="What you pay"></div>
       <div class="form-row"><label>Sell Price (${db.settings.currency})</label><input type="number" id="np-sellprice" value="0" min="0" placeholder="What you charge"></div>
     </div>
-    <div style="font-size:11px;color:#64748b;margin:-8px 0 10px;background:#f0f9ff;padding:6px 10px;border-radius:6px">💡 Sell price appears in POS when selling this product to customers. Leave 0 for auto 40% markup.</div>
+    <div style="font-size:11px;color:#64748b;margin:-8px 0 10px;background:#f0f9ff;padding:6px 10px;border-radius:6px">💡 Sell price appears in POS. Leave 0 for auto 40% markup.</div>
     <div class="form-row"><label>Supplier</label><input type="text" id="np-sup" placeholder="Supplier name" list="sup-datalist"><datalist id="sup-datalist">${(db.suppliers||[]).map(s=>`<option>${s.name}</option>`).join('')}</datalist></div>
     <div class="form-row"><label>Is this a liquid product?</label>
       <select id="np-isliq" onchange="toggleNPLiq()">
@@ -1919,11 +2490,21 @@ function showAddProduct(){
     </div>
     <div id="np-liq-fields" style="display:none">
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:11px;color:#0369a1">💧 Liquid tracking predicts when product will run out based on daily usage.</div>
-      <div class="form-row"><label>Volume per unit (ml)</label><input type="number" id="np-vol" value="100" min="1" placeholder="e.g. 250"></div>
+      <div class="form-row"><label>Volume per unit (ml)</label><input type="number" id="np-vol" value="100" min="1"></div>
       <div class="form-row"><label>Currently open bottle (ml remaining)</label><input type="number" id="np-curml" value="0" min="0"></div>
       <div class="form-row"><label>Estimated daily usage (ml/day)</label><input type="number" id="np-daily" value="10" min="0.5" step="0.5"></div>
     </div>
+    <input type="hidden" id="np-img-data" value="">
     <div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveProduct()">Add Product →</button></div>`);
+}
+function previewProductImage(input){
+  if(!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    document.getElementById('np-img-preview').innerHTML=`<img src="${e.target.result}" style="width:60px;height:60px;object-fit:cover;border-radius:8px">`;
+    document.getElementById('np-img-data').value=e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
 }
 function toggleNPLiq(){document.getElementById('np-liq-fields').style.display=document.getElementById('np-isliq').value==='1'?'block':'none';}
 function saveProduct(){
@@ -1931,7 +2512,8 @@ function saveProduct(){
   const isLiquid=document.getElementById('np-isliq').value==='1';
   const costPrice=parseInt(document.getElementById('np-price').value)||0;
   const sellPrice=parseInt(document.getElementById('np-sellprice').value)||0;
-  const p={id:Date.now(),name:nm,cat:document.getElementById('np-cat').value,stock:parseInt(document.getElementById('np-stock').value)||0,minStock:parseInt(document.getElementById('np-min').value)||3,price:costPrice,sellPrice:sellPrice||Math.round(costPrice*1.4),supplier:document.getElementById('np-sup').value||'—',isLiquid};
+  const imageData=document.getElementById('np-img-data')?.value||'';
+  const p={id:Date.now(),name:nm,cat:document.getElementById('np-cat').value,stock:parseInt(document.getElementById('np-stock').value)||0,minStock:parseInt(document.getElementById('np-min').value)||3,price:costPrice,sellPrice:sellPrice||Math.round(costPrice*1.4),supplier:document.getElementById('np-sup').value||'—',isLiquid,imageData:imageData};
   if(isLiquid){p.volumeMl=parseFloat(document.getElementById('np-vol').value)||100;p.currentMl=parseFloat(document.getElementById('np-curml').value)||0;p.dailyUsageMl=parseFloat(document.getElementById('np-daily').value)||10;p.openedDate=TODAY;}
   db.inventory.push(p);saveDB();closeModal();renderInventory();showToast('Product added!');
 }
@@ -2224,18 +2806,18 @@ function rptSales(sales,cur){
     ${kpiBlock('Net Revenue',cur+' '+(rev-disc).toLocaleString(),'<span class="kpi-up">After discounts</span>','')}
   </div>
   <div class="card"><div class="card-title">Sales Transactions</div>
-    ${rptTable(
-      ['Date','Customer','Services','Payment','Discount','Total'],
-      sales.map(s=>[
-        s.date,
-        s.customer,
-        s.items.map(i=>i.service).join(', '),
-        `<span class="s-badge s-done">${s.payment}</span>`,
-        s.discount?`<span style="color:#e11d48">-${cur} ${s.discount}</span>`:'—',
-        `<b>${cur} ${s.total}</b>`
-      ]),
-      ['left','left','left','center','right','right']
-    )}
+    <div style="overflow-x:auto"><table class="inv-table" style="width:100%;min-width:600px">
+      <thead><tr><th>Date</th><th>Customer</th><th>Services</th><th>Payment</th><th>Discount</th><th>Total</th><th>Receipt</th></tr></thead>
+      <tbody>${sales.map(s=>`<tr>
+        <td>${s.date}</td>
+        <td>${s.customer}</td>
+        <td style="max-width:180px;font-size:11px">${s.items.map(i=>i.service).join(', ')}</td>
+        <td><span class="s-badge s-done">${s.payment}</span></td>
+        <td>${s.discount?`<span style="color:#e11d48">-${cur} ${s.discount}</span>`:'—'}</td>
+        <td><b>${cur} ${s.total}</b></td>
+        <td><button class="btn btn-sm" onclick="previewReceipt(${s.id})" style="font-size:11px;padding:4px 8px">🖨️ Print</button></td>
+      </tr>`).join('')}</tbody>
+    </table></div>
   </div>`;
 }
 
@@ -2969,12 +3551,105 @@ function checkInOut(){
 function adminTab(tab,el){
   document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('admin-'+tab).classList.add('active');
+  const sec=document.getElementById('admin-'+tab);
+  if(sec)sec.classList.add('active');
   if(tab==='employees')renderEmployees();
   if(tab==='services')renderAdminServices();
+  if(tab==='packages')renderAdminPackages();
+  if(tab==='memberships')renderAdminMemberships();
   if(tab==='categories')renderCategories();
+  if(tab==='settings')loadSettingsForm();
 }
 function renderAdmin(){renderEmployees();}
+
+// ─── PACKAGES ADMIN ─────────────────────────────────────────────
+function renderAdminPackages(){
+  if(!db.packages)db.packages=[];
+  document.getElementById('pkg-count-lbl').textContent=db.packages.length+' packages';
+  const cur=db.settings.currency;
+  document.getElementById('pkg-list').innerHTML=db.packages.length===0
+    ?'<div style="text-align:center;padding:40px;color:#94a3b8">No packages yet. Click "+ Add Package"</div>'
+    :db.packages.map(p=>`<div class="card" style="margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="font-size:2rem">${p.icon}</span>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:800;color:#0f172a">${p.name}</div>
+            <div style="font-size:12px;color:#64748b">${(p.services||[]).map(s=>s.name).join(' + ')}</div>
+            <div style="font-size:12px;color:#94a3b8">${p.duration} min total</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:18px;font-weight:900;color:#7c3aed">${cur} ${p.price}</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-sm btn-danger" onclick="deletePkg(${p.id})">Del</button>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#64748b">${p.description||''}</div>
+      </div>`).join('');
+}
+function deletePkg(id){if(!confirm('Delete this package?'))return;db.packages=db.packages.filter(p=>p.id!==id);saveDB();renderAdminPackages();showToast('Package deleted');}
+function showAddPackage(){
+  const svcOpts=db.services.map(s=>`<option value="${s.id}">${s.name} (${db.settings.currency} ${s.price})</option>`).join('');
+  showModal(`<div class="modal-title">Add Package</div>
+    <div class="form-row"><label>Package Name *</label><input type="text" id="pk-name" placeholder="e.g. Bride Package"></div>
+    <div class="form-row"><label>Icon (emoji)</label><input type="text" id="pk-icon" value="🎁" maxlength="4" style="width:60px;font-size:1.5rem"></div>
+    <div class="form-row"><label>Description</label><input type="text" id="pk-desc" placeholder="Short description"></div>
+    <div class="form-row"><label>Services included (hold Ctrl/⌘ to select multiple)</label>
+      <select id="pk-svcs" multiple style="height:140px">${svcOpts}</select>
+    </div>
+    <div class="form-row"><label>Package Price (${db.settings.currency}) *</label><input type="number" id="pk-price" value="0" min="0"></div>
+    <div class="form-row"><label>Total Duration (min)</label><input type="number" id="pk-dur" value="60" min="15"></div>
+    <div style="font-size:11px;color:#94a3b8;margin-bottom:12px">The package will appear in POS → Packages tab</div>
+    <div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="savePkg()">Add Package</button></div>`);
+}
+function savePkg(){
+  const nm=document.getElementById('pk-name').value.trim();
+  if(!nm){showToast('Name required','warn');return;}
+  const price=parseInt(document.getElementById('pk-price').value)||0;
+  const sel=Array.from(document.getElementById('pk-svcs').selectedOptions);
+  const services=sel.map(o=>{const s=db.services.find(x=>x.id==o.value);return{serviceId:s?.id,name:s?.name||o.text};});
+  if(!db.packages)db.packages=[];
+  db.packages.push({id:Date.now(),name:nm,icon:document.getElementById('pk-icon').value||'🎁',description:document.getElementById('pk-desc').value,services,price,duration:parseInt(document.getElementById('pk-dur').value)||60});
+  saveDB();closeModal();renderAdminPackages();showToast('Package added!');
+}
+
+// ─── MEMBERSHIPS ADMIN ───────────────────────────────────────────
+function renderAdminMemberships(){
+  if(!db.memberships)db.memberships=[];
+  const cur=db.settings.currency;
+  document.getElementById('mem-admin-list').innerHTML=db.memberships.length===0
+    ?'<div style="text-align:center;padding:40px;color:#94a3b8">No membership cards yet. Click "+ Add Membership"</div>'
+    :db.memberships.map(m=>`<div class="card" style="margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:2rem">${m.icon}</span>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:800;color:#0f172a">${m.name}</div>
+            <div style="font-size:12px;color:#64748b">${m.description}</div>
+            ${m.bonus?`<div style="font-size:12px;color:#16a34a">+${cur} ${m.bonus} bonus credit</div>`:''}
+          </div>
+          <div style="font-size:18px;font-weight:900;color:#d97706">${cur} ${m.price}</div>
+          <button class="btn btn-sm btn-danger" onclick="deleteMem(${m.id})">Del</button>
+        </div>
+      </div>`).join('');
+}
+function deleteMem(id){if(!confirm('Delete this membership?'))return;db.memberships=db.memberships.filter(m=>m.id!==id);saveDB();renderAdminMemberships();showToast('Membership deleted');}
+function showAddMembership(){
+  showModal(`<div class="modal-title">Add Membership Card</div>
+    <div class="form-row"><label>Name *</label><input type="text" id="me-name" placeholder="e.g. Gold Card"></div>
+    <div class="form-row"><label>Icon (emoji)</label><input type="text" id="me-icon" value="💳" maxlength="4" style="width:60px;font-size:1.5rem"></div>
+    <div class="form-row"><label>Price / Value (${db.settings.currency}) *</label><input type="number" id="me-price" value="500" min="0"></div>
+    <div class="form-row"><label>Bonus Credit (${db.settings.currency})</label><input type="number" id="me-bonus" value="0" min="0" placeholder="Extra credit on purchase"></div>
+    <div class="form-row"><label>Description</label><input type="text" id="me-desc" placeholder="e.g. QAR 500 credit usable on any service"></div>
+    <div style="font-size:11px;color:#94a3b8;margin-bottom:12px">Customer buys this card — credit is deducted from future bills</div>
+    <div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveMembership()">Add Membership</button></div>`);
+}
+function saveMembership(){
+  const nm=document.getElementById('me-name').value.trim();
+  if(!nm){showToast('Name required','warn');return;}
+  if(!db.memberships)db.memberships=[];
+  db.memberships.push({id:Date.now(),name:nm,icon:document.getElementById('me-icon').value||'💳',price:parseInt(document.getElementById('me-price').value)||0,bonus:parseInt(document.getElementById('me-bonus').value)||0,description:document.getElementById('me-desc').value});
+  saveDB();closeModal();renderAdminMemberships();showToast('Membership added!');
+}
 
 // EMPLOYEES
 function renderEmployees(){
@@ -3120,11 +3795,165 @@ function deleteCat(c){
 
 // SETTINGS
 function saveSettings(){
-  db.settings.name=document.getElementById('set-name').value;
-  db.settings.currency=document.getElementById('set-currency').value;
-  db.settings.tax=parseInt(document.getElementById('set-tax').value)||0;
-  db.settings.pts=parseInt(document.getElementById('set-pts').value)||1;
-  saveDB();showToast('Settings saved!');
+  const s=db.settings;
+  const gv=(id)=>{const el=document.getElementById(id);return el?el.value:'';};
+  const gc=(id)=>{const el=document.getElementById(id);return el?el.checked:false;};
+  s.name         = gv('set-name')     || s.name;
+  s.currency     = gv('set-currency') || s.currency;
+  s.tax          = parseInt(gv('set-tax'))||0;
+  s.ptsEarn      = parseInt(gv('set-pts-earn'))||10;
+  s.ptsRedeem    = parseInt(gv('set-pts-redeem'))||100;
+  s.receiptLogo      = gv('set-r-logo')   || '✦';
+  s.receiptTagline   = gv('set-r-tag');
+  s.receiptAddress   = gv('set-r-addr');
+  s.receiptPhone     = gv('set-r-phone');
+  s.receiptVat       = gv('set-r-vat');
+  s.receiptFooter    = gv('set-r-footer');
+  s.receiptShowTax   = gc('set-r-tax');
+  s.receiptShowPoints= document.getElementById('set-r-pts')?gc('set-r-pts'):true;
+  s.receiptPaper     = gv('set-r-paper') || '80mm';
+  saveDB();
+  const sn=document.getElementById('sidebar-store-name');if(sn)sn.textContent=s.name;
+  showToast('Settings saved!');
+}
+function loadSettingsForm(){
+  const s=db.settings;
+  const sv=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val!=null?val:'';};
+  const sc=(id,val)=>{const el=document.getElementById(id);if(el)el.checked=!!val;};
+  sv('set-name',      s.name||'');
+  sv('set-currency',  s.currency||'QAR');
+  sv('set-tax',       s.tax||0);
+  sv('set-pts-earn',  s.ptsEarn||10);
+  sv('set-pts-redeem',s.ptsRedeem||100);
+  sv('set-r-logo',    s.receiptLogo||'✦');
+  sv('set-r-tag',     s.receiptTagline||'');
+  sv('set-r-addr',    s.receiptAddress||'');
+  sv('set-r-phone',   s.receiptPhone||'');
+  sv('set-r-vat',     s.receiptVat||'');
+  sv('set-r-footer',  s.receiptFooter||'');
+  sc('set-r-tax',     s.receiptShowTax||false);
+  sc('set-r-pts',     s.receiptShowPoints!==false);
+  sv('set-r-paper',   s.receiptPaper||'80mm');
+}
+
+// ─── RECEIPT / THERMAL PRINT ────────────────────────────────────
+function buildReceiptHTML(sale, isPreview){
+  const s=db.settings;
+  const cur=s.currency||'QAR';
+  const sep='────────────────────';
+  const dotSep='- - - - - - - - - - ';
+
+  // Customer
+  const cust=sale?db.customers.find(c=>c.id==sale.customerId):null;
+  const custName=sale?sale.customer:'Walk-in';
+  const items=sale?sale.items:billItems.map(it=>({service:it.name,price:it.price,qty:it.qty||1,staff:Array.isArray(it.assignedStaff)?it.assignedStaff[0]:it.assignedStaff}));
+  const subtotal=items.reduce((a,it)=>a+it.price,0);
+  const disc=sale?sale.discount:0;
+  const total=sale?sale.total:subtotal;
+  const taxAmt=s.receiptShowTax&&s.tax?Math.round(total*s.tax/100):0;
+  const payment=sale?sale.payment:'—';
+  const date=sale?sale.date:new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  const saleId=sale?('#'+String(sale.id).slice(-6)):'#PREVIEW';
+  const ptsEarned=sale?Math.floor(total*(s.ptsEarn||10)):0;
+  const custPts=(cust?cust.points:0);
+
+  const w=s.receiptPaper==='58mm'?228:302;
+
+  let html=`<div class="receipt-preview" style="width:${w}px">`;
+
+  // Header
+  html+=`<div class="r-center r-xl">${s.receiptLogo||'✦'} ${s.name}</div>`;
+  if(s.receiptTagline) html+=`<div class="r-center" style="font-size:10px;margin-top:2px">${s.receiptTagline}</div>`;
+  if(s.receiptAddress) html+=`<div class="r-center" style="font-size:10px">${s.receiptAddress}</div>`;
+  if(s.receiptPhone)   html+=`<div class="r-center" style="font-size:10px">Tel: ${s.receiptPhone}</div>`;
+  if(s.receiptVat)     html+=`<div class="r-center" style="font-size:10px">${s.receiptVat}</div>`;
+
+  html+=`<div class="r-line"></div>`;
+  html+=`<div class="r-row"><span>Date: ${date}</span><span>${saleId}</span></div>`;
+  if(custName&&custName!=='Walk-in') html+=`<div>Customer: <b>${custName}</b></div>`;
+  const staffName=items[0]?.staff||'';
+  if(staffName) html+=`<div>Staff: ${staffName}</div>`;
+  html+=`<div class="r-line"></div>`;
+
+  // Items
+  items.forEach(it=>{
+    const qty=it.qty&&it.qty>1?` x${it.qty}`:'';
+    html+=`<div class="r-row"><span class="r-name">${it.service||it.name}${qty}</span><span>${cur} ${it.price}</span></div>`;
+  });
+
+  html+=`<div class="r-line"></div>`;
+  html+=`<div class="r-row"><span>Subtotal</span><span>${cur} ${subtotal}</span></div>`;
+  if(disc>0) html+=`<div class="r-row"><span>Discount</span><span>-${cur} ${disc}</span></div>`;
+  if(taxAmt>0) html+=`<div class="r-row"><span>Tax (${s.tax}%)</span><span>${cur} ${taxAmt}</span></div>`;
+  html+=`<div class="r-line"></div>`;
+  html+=`<div class="r-row r-bold" style="font-size:14px"><span>TOTAL</span><span>${cur} ${total}</span></div>`;
+  html+=`<div style="font-size:11px;margin-top:3px">Payment: ${payment.toUpperCase()}</div>`;
+
+  // Loyalty points
+  if(s.receiptShowPoints!==false&&(cust||isPreview)){
+    html+=`<div class="r-line"></div>`;
+    if(ptsEarned>0) html+=`<div style="font-size:11px">⭐ Points earned this visit: +${ptsEarned}</div>`;
+    html+=`<div style="font-size:11px">⭐ Total points balance: ${custPts+(ptsEarned&&!sale?ptsEarned:0)} pts</div>`;
+    const rd=s.ptsRedeem||100;
+    html+=`<div style="font-size:10px;color:#555">Redeem ${rd} pts = ${cur} 1 discount</div>`;
+  }
+
+  // Footer
+  if(s.receiptFooter){
+    html+=`<div class="r-line"></div>`;
+    html+=`<div class="r-footer">${s.receiptFooter.replace(/\n/g,'<br>')}</div>`;
+  }
+
+  html+=`<div style="text-align:center;font-size:9px;margin-top:8px;color:#aaa">Powered by SaaS Salon</div>`;
+  html+=`</div>`;
+  return html;
+}
+
+function previewReceipt(saleId){
+  const sale=saleId?db.sales.find(x=>x.id===saleId):null;
+  const hasItems=billItems.length>0||sale;
+  if(!hasItems&&!saleId){showToast('Add items to bill first','warn');return;}
+  const html=buildReceiptHTML(sale,true);
+  showModal(`
+    <div class="modal-title">🖨️ Receipt Preview</div>
+    <div style="overflow-x:auto;padding:4px 0">${html}</div>
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary" style="flex:1" onclick="printReceipt(${saleId||'null'})">🖨️ Print (80mm)</button>
+      <button class="btn" style="flex:1" onclick="closeModal()">Close</button>
+    </div>
+    <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:8px">Make sure your thermal printer is connected and set to 80mm paper</div>
+  `);
+}
+
+function printReceipt(saleId){
+  const sale=saleId&&saleId!=='null'?db.sales.find(x=>x.id==saleId):null;
+  const html=buildReceiptHTML(sale,false);
+  const s=db.settings;
+  const w=s.receiptPaper==='58mm'?'58mm':'80mm';
+
+  // Open print window
+  const win=window.open('','_blank','width=400,height=600,scrollbars=yes');
+  win.document.write(`<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <title>Receipt — ${s.name}</title>
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+      body{background:white;margin:0;padding:0}
+      @page{size:${w} auto;margin:4mm}
+      @media print{body{margin:0;padding:0}}
+      .receipt-preview{width:100%;font-family:'Courier New',Courier,monospace;font-size:12px;color:#000;line-height:1.55;padding:4px}
+      .r-center{text-align:center}
+      .r-bold{font-weight:700}
+      .r-lg{font-size:15px;font-weight:700}
+      .r-xl{font-size:16px;font-weight:900;letter-spacing:1px}
+      .r-line{border-top:1px dashed #555;margin:5px 0}
+      .r-row{display:flex;justify-content:space-between;align-items:flex-start}
+      .r-row .r-name{flex:1;margin-right:8px}
+      .r-footer{font-size:10px;text-align:center;color:#555;margin-top:4px}
+    </style>
+  </head><body>${html}<script>window.onload=function(){window.print();setTimeout(function(){window.close();},1000);}<\/script></body></html>`);
+  win.document.close();
+  closeModal();
 }
 
 // ─── MODAL & TOAST ──────────────────────────────────────────────
